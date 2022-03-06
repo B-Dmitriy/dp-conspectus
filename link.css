@@ -1,0 +1,26 @@
+.link {
+    position: relative;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-balck);
+}
+
+.link:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    position: absolute;
+    top: calc(1em + 4px);
+    left: 0;
+    background-color: #F5DF4D;
+}
+
+.link:hover:after {
+    width: 100%;
+    transition: .5s;
+}
+
+.link:active {
+    color: var(--color-secondary);
+}
