@@ -13,10 +13,10 @@
     --color-balck: #222222;
     --color-white: #e1e1e1;
 
+    font-family: Cambria, serif;
     font-size: 16px;
     color: var(--color-white);
 }
-
 
 body {
     display: grid;
@@ -50,4 +50,29 @@ body {
     grid-area: f;
     background-color: var(--color-balck);
     min-height: 20vh;
+}
+
+.card {
+    margin: 1rem;
+    padding: 1rem;
+    width: 320px;
+    height: 360px;
+    color: var(--color-balck);
+    background-color: var(--color-secondary);
+}
+
+.card h2 {
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+p:before {
+    content: '';
+    margin-left: .5rem;
+}
+
+.card button {
+    float: right;
 }
