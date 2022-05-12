@@ -6,10 +6,67 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="link.css">
     <link rel="stylesheet" type="text/css" href="button.css">
+    <link rel="stylesheet" type="text/css" href="db-slider.css">
+    <link rel="stylesheet" type="text/css" href="db-photo-carousel.css">
+    <script>
+        class Slider extends HTMLElement {
+            connectedCallback() {
+                this.setAttribute('class', 'db-slider')
+                this.innerHTML = `<div class="db-slider__bg-overlay"></div><div class="db-slider__thumb"></div>`;
+            }
+        }
+        if (!customElements.get('db-slider')) {
+            customElements.define('db-slider', Slider);
+        }
+    </script>
+    <script>
+        class PhotoCarousel extends HTMLElement {
+            connectedCallback() {
+                this.setAttribute('class', 'db-photo-carousel');
+                this._photoIndex = 0;
+                this._photos = this.getAttribute('photos').split(',');
+                this.innerHTML = `<h2>${this.getAttribute('title')}</h2>
+                    <h4>${this.getAttribute('author')}</h4>
+                    <div class="db-photo-carousel__image-container"></div>
+                    <button class="db-photo-carousel__back">&lt</button>
+                    <button class="db-photo-carousel__forward">&gt</button>`;
 
+                this.showPhoto();
+
+                this.querySelector('button.db-photo-carousel__back').addEventListener('click', event =>
+                    this.onBackButtonClick(event));
+                this.querySelector('button.db-photo-carousel__forward').addEventListener('click', event =>
+                    this.onForwardButtonClick(event));
+            }
+            showPhoto() {
+                this.querySelector('.db-photo-carousel__image-container').style.backgroundImage =
+                    'url(' + this._photos[this._photoIndex] + ')';
+            }
+            onBackButtonClick() {
+                this._photoIndex --;
+                if (this._photoIndex < 0) {
+                    this._photoIndex = this._photos.length-1;
+                }
+                this.showPhoto();
+
+            }
+            onForwardButtonClick() {
+                this._photoIndex ++;
+                if (this._photoIndex >= this._photos.length) {
+                    this._photoIndex = 0;
+                }
+                this.showPhoto();
+            }
+        }
+
+        if (!customElements.get('db-photo-carousel')) {
+            customElements.define('db-photo-carousel', PhotoCarousel);
+        }
+    </script>
 </head>
 <body>
 <header class="header">
+
 </header>
 <section class="side-bar">
     <nav>
@@ -26,6 +83,15 @@
             scrambled it to make a type specimen book. </p>
         <button id="card-button" class="button accent">Accept</button>
     </section>
+    <db-slider value="50">
+
+    </db-slider>
+    <db-photo-carousel
+        title="Future Vacation Photos"
+        author="B Dmitriy"
+        photos="images/git.png,images/sass.png,images/js.png,images/react.png"
+    >
+    </db-photo-carousel>
 </main>
 <footer class="footer">
 
