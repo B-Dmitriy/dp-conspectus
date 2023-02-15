@@ -1,0 +1,23 @@
+{
+  "name": "dp-conspectus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/B-Dmitriy/dp-conspectus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/B-Dmitriy/dp-conspectus/issues"
+  },
+  "homepage": "https://github.com/B-Dmitriy/dp-conspectus#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
