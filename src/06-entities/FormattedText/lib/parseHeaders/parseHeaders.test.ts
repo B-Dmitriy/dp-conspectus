@@ -1,7 +1,6 @@
 import {parseHeaders} from "./parseHeaders";
-import {parseCode} from "../parseCode/parseCode";
 
-describe('parseCode', () => {
+describe('parseHeaders', () => {
     test('correct string parsed', () => {
         const testString = '***Header***';
 
@@ -12,7 +11,7 @@ describe('parseCode', () => {
         const testString = '***\nHeader\n***';
         const resultTextNode = '***\nHeader\n***';
 
-        expect(parseCode(testString)).toBe(`${resultTextNode}`);
+        expect(parseHeaders(testString)).toBe(`${resultTextNode}`);
     });
 
     test('incorrect strings parsed', () => {
