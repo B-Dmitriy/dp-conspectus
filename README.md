@@ -1,1 +1,1 @@
-![Coverage](https://raw.githubusercontent.com/B-Dmitriy/dp-blog/master/coverage_badge.svg?sanitize=true)
+![Coverage](https://raw.githubusercontent.com/B-Dmitriy/dp-conspectus/master/coverage_badge.svg?sanitize=true)
