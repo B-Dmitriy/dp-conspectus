@@ -24,7 +24,7 @@ export default (env: EnvVariables): webpack.Configuration => {
             html: path.resolve(__dirname, 'public', 'index.html'),
             src: path.resolve(__dirname, 'src'),
             alias: {
-                i18n: ''
+                i18n: path.resolve(__dirname, 'src', '07-shared', 'config', 'i18n')
             }
         },
     })
