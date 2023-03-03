@@ -1,0 +1,81 @@
+.tree-item {
+    width: 100%;
+    text-align: start;
+    background-color: lightgray;
+}
+
+.tree-item__header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+
+.tree-item__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tree-item__arrow svg {
+    transform: rotate(0deg);
+    transition: .3s;
+}
+
+.tree-item__arrow:hover {
+    background-color: darkgrey;
+}
+
+.tree-item__arrow_open svg {
+    transform: rotate(90deg);
+}
+
+.tree-item__title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    line-height: 24px;
+}
+
+.tree-item__title:hover {
+    background-color: darkgrey;
+}
+.tree-item__title:hover .item__title__toolbar {
+    display: block;
+}
+
+
+.item__title__toolbar {
+    display: none;
+    margin-left: auto;
+}
+
+.tree-item__title_without-arrow {
+    margin-left: 24px;
+}
+
+.tree-item__title:hover {
+    background-color: lightcyan;
+}
+
+@keyframes drop {
+    from {
+        z-index: -1;
+        opacity: 0;
+        transform: translateY(-24px);
+    }
+
+    to {
+        z-index: 0;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tree-item__children {
+    animation-name: drop;
+    animation-duration: .2s;
+    height: 100%;
+    margin-left: 12px;
+}
