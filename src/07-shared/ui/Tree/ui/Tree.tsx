@@ -1,6 +1,6 @@
 import React from 'react';
 import {ITreeItem, TreeItem, TreeItemRole} from "./TreeItem";
-import './Tree.css';
+import './Tree.scss';
 
 interface TreeProps {
     items: ITreeItem[],

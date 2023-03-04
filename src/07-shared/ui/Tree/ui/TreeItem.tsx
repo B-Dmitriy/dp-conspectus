@@ -1,8 +1,8 @@
 import React, {memo, useState} from "react";
-import './TreeItem.css';
-import {ArrowR} from "../../icons/ArrowR";
+import './TreeItem.scss';
+import {ArrowR} from "../../../assets/icons/ArrowR";
 
-export type TreeItemRole = 'block' | 'section' | 'article';
+export type TreeItemRole = 'page' | 'section' | 'article';
 
 export interface ITreeItem {
     id: number;

@@ -1,0 +1,74 @@
+{
+  "catalogs": [
+    {
+      "id": 1,
+      "title": "page 1",
+      "description": "page 1 description"
+    },
+    {
+      "title": "page 3",
+      "id": 3,
+      "description": "page 3 description"
+    }
+  ],
+  "sections": [
+    {
+      "title": "section 1 title",
+      "catalog_id": 1,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "catalog_id": 1,
+      "title": "sections 1"
+    },
+    {
+      "id": 3,
+      "catalog_id": 3,
+      "title": "sections 1"
+    },
+    {
+      "catalog_id": 3,
+      "title": "article for page 2",
+      "id": 5
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "section_id": 1,
+      "title": "article 1",
+      "text": "***Lorem*** Lorem ipsum dolor sit amet, consectetur adipisicing elit. \\n' +\n        '```\\nbody {\\n    color:\\'red\\';\\n}```\\n A, ad amet aperiam beatae [link](\\'https://www.google.com/\\')' +\n        '\\n deleniti doloribus enim eum fuga hic id illo, ' +\n        '\\n iusto laudantium maxime, modi nobis quibusdam sunt suscipit tempora! \\n```\\nconst y = 8;\\n``` ' +\n        '***Dolor sit*** \\n Lorem ipsum dolor sit amet, consectetur adipisicing \\n' +\n        'elit [link2](\\'https://www.google.com/\\'). ",
+      "tags": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "title": "article 2",
+      "text": "article text tag2",
+      "section_id": 1,
+      "tags": [
+        2
+      ]
+    },
+    {
+      "section_id": 1,
+      "title": "article 3 new",
+      "text": "article 3 text",
+      "tags": [],
+      "id": 3
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "title": "tag1"
+    },
+    {
+      "id": 2,
+      "title": "tag2"
+    }
+  ]
+}
