@@ -1,36 +1,36 @@
-.tree-item {
+.treeItem {
     width: 100%;
     text-align: start;
     background-color: lightgray;
 }
 
-.tree-item__header {
+.treeItem__header {
     display: flex;
     width: 100%;
     align-items: center;
 }
 
 
-.tree-item__arrow {
+.treeItem__arrow {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.tree-item__arrow svg {
-    transform: rotate(0deg);
+.treeItem__arrow svg {
+    transform: rotate(-90deg);
     transition: .3s;
 }
 
-.tree-item__arrow:hover {
+.treeItem__arrow:hover {
     background-color: darkgrey;
 }
 
-.tree-item__arrow_open svg {
-    transform: rotate(90deg);
+.treeItem__arrow_open svg {
+    transform: rotate(0deg);
 }
 
-.tree-item__title {
+.treeItem__title {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -38,10 +38,10 @@
     line-height: 24px;
 }
 
-.tree-item__title:hover {
+.treeItem__title:hover {
     background-color: darkgrey;
 }
-.tree-item__title:hover .item__title__toolbar {
+.treeItem__title:hover .item__title__toolbar {
     display: block;
 }
 
@@ -51,11 +51,11 @@
     margin-left: auto;
 }
 
-.tree-item__title_without-arrow {
+.treeItem__title_withoutArrow {
     margin-left: 24px;
 }
 
-.tree-item__title:hover {
+.treeItem__title:hover {
     background-color: lightcyan;
 }
 
@@ -73,7 +73,7 @@
     }
 }
 
-.tree-item__children {
+.treeItem__children {
     animation-name: drop;
     animation-duration: .2s;
     height: 100%;
