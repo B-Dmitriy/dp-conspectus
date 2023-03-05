@@ -1,51 +1,62 @@
 import React, {memo, useState} from "react";
-import './TreeItem.scss';
+import classes from './TreeItem.module.scss';
 import {ArrowR} from "../../../assets/icons/ArrowR";
 
-export type TreeItemRole = 'page' | 'section' | 'article';
+export type TreeItemRole = 'catalog' | 'section' | 'article';
 
-export interface ITreeItem {
+export interface TreeItemInterface {
     id: number;
     role: TreeItemRole;
     title: string;
-    children: ITreeItem[];
+    children: TreeItemInterface[];
+    isLast: boolean;
 }
 
 interface TreeItemProps {
-    item: ITreeItem,
+    item: TreeItemInterface,
+    onIconClick: (role: TreeItemRole, id: number) => void;
     onClickHandler: (role: TreeItemRole, id: number) => void;
 }
 
-export const TreeItem = memo(({item, onClickHandler}: TreeItemProps) => {
+export const TreeItem = memo(({item, onIconClick, onClickHandler}: TreeItemProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const onIconClick = () => setIsOpen((prev) => !prev)
+    const onIconClickHandler = () => {
+        onIconClick(item.role, item.id);
+        setIsOpen((prev) => !prev)
+    }
     const onTitleClick = () => onClickHandler(item.role, item.id)
 
     return (
-        <div className="tree-item">
-            <div className="tree-item__header">
-                {!!item.children.length && (
-                    <span
-                        className={`tree-item__arrow ${isOpen ? "tree-item__arrow_open" : ""}`}
-                        onClick={onIconClick}
-                    >
-                    {item.children && <ArrowR/>}
-                </span>
-                )}
+        <div className={classes.treeItem}>
+            <div className={classes.treeItem__header}>
+                {!item.isLast && <span
+                    className={`${classes.treeItem__arrow} ${isOpen ? classes.treeItem__arrow_open : ""}`}
+                    onClick={onIconClickHandler}
+                >
+                {item.children && <ArrowR/>}
+                </span>}
                 <span
-                    className={`tree-item__title ${!item.children.length ? "tree-item__title_without-arrow" : ""}`}
+                    className={`${classes.treeItem__title} ${(item.children !== null && !item.children.length)
+                        ? classes.treeItem__title_withoutArrow
+                        : ""}`}
                     onClick={onTitleClick}
                 >
                     <span>{item.title}</span>
-                    <span className="item__title__toolbar">
+                    <span className={classes.item__title__toolbar}>
                         <button>+</button>
                         <button>d</button>
                     </span>
                 </span>
             </div>
-            {isOpen && <div className="tree-item__children">
-                {item.children.map((i) => <TreeItem key={i.id} item={i} onClickHandler={onClickHandler}/>)}
+            {isOpen && <div className={classes.treeItem__children}>
+                {item.children !== null && item.children.length < 1 && <span>No data inside</span>}
+                {item.children !== null && item.children.map((i) => <TreeItem
+                    key={i.id}
+                    item={i}
+                    onIconClick={onIconClick}
+                    onClickHandler={onClickHandler}
+                />)}
             </div>}
         </div>
     )

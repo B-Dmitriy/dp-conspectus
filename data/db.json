@@ -2,13 +2,13 @@
   "catalogs": [
     {
       "id": 1,
-      "title": "page 1",
-      "description": "page 1 description"
+      "title": "catalog 1",
+      "description": "catalog 1 description"
     },
     {
-      "title": "page 3",
+      "title": "catalog 3",
       "id": 3,
-      "description": "page 3 description"
+      "description": "catalog 3 description"
     }
   ],
   "sections": [
@@ -47,7 +47,7 @@
     {
       "id": 2,
       "title": "article 2",
-      "text": "article text tag2",
+      "text": "***Webpack***\n\nКакой-то текст внутри которого [Ссылка](http://google.com), на сайт Goolge\n\n```\nconst x === 5;\n```",
       "section_id": 1,
       "tags": [
         2
@@ -59,6 +59,13 @@
       "text": "article 3 text",
       "tags": [],
       "id": 3
+    },
+    {
+      "section_id": 2,
+      "title": "article 4",
+      "text": "article 4 text",
+      "tags": [2],
+      "id": 4
     }
   ],
   "tags": [

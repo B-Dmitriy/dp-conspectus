@@ -1,28 +1,71 @@
 import {classNames} from '07-shared/lib/classNames/classNames';
 import classes from './Sidebar.module.scss';
-import {useEffect, useState} from 'react';
-import { NavLink } from 'react-router-dom';
+import {useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {Tree} from "07-shared/ui/Tree/ui/Tree";
+import {fetchCatalogThunk} from "./../model/services/fetchCatalogs/fetchCatalog.thunk";
+import {TreeItemRole} from "07-shared/ui/Tree/ui/TreeItem";
+import {useAppDispatch, useAppSelector} from '07-shared/hooks/appHooks';
+import {getMenuItems} from "04-widgets/Sidebar/model/selectors/sidebar.selectors";
+import {fetchSections} from "04-widgets/Sidebar/model/services/fetchSections/fetchSections.thunk";
+import {fetchArticle} from "04-widgets/Sidebar/model/services/fetchArticleThunk/fetchArticle.thunk";
 
 interface SidebarProps {
     className?: string;
 }
 
 export const Sidebar = ({className = ''}: SidebarProps) => {
-    const [menuItems, setMenuItems] = useState<any>([]);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const menuItems = useAppSelector(getMenuItems);
 
     useEffect(() => {
-        fetch('http://localhost:3000/pages')
-            .then((res) => res.json())
-            .then((json) => setMenuItems(json));
+        dispatch(fetchCatalogThunk())
     }, []);
+
+    const onIconClick = (path: TreeItemRole, id: number) => {
+        console.log(path, id)
+        switch (path) {
+            case "catalog":
+                dispatch(fetchSections(id));
+                return;
+            case "section":
+                dispatch(fetchArticle(id));
+                return;
+            case "article":
+                // dispatch()
+                return;
+            default:
+                return;
+        }
+    };
+
+    const onItemClick = (path: TreeItemRole, id: number) => {
+        switch (path) {
+            case "catalog":
+                navigate(`/catalog/${id}`);
+                return;
+            case "section":
+                navigate(`/section/${id}`);
+                return;
+            case "article":
+                navigate(`/article/${id}`);
+                return;
+            default:
+                return;
+        }
+    };
 
     return (
         <div className={classNames(classes.Sidebar, {}, [className])}>
-            {menuItems.map((item: any) => {
-                return <p key={item.id}>{item.title}</p>
-            })}
-            <NavLink to={'/catalog'}>Catalogs</NavLink>
-            <NavLink to={'/section'}>Sections</NavLink>
+            <section className={classes.menu}>
+                <Link to={'/main'}>Main</Link>
+                <Tree
+                    items={menuItems}
+                    onIconClick={onIconClick}
+                    onItemClick={onItemClick}
+                />
+            </section>
         </div>
     );
 }

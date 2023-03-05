@@ -1,17 +1,18 @@
 import React from 'react';
-import {ITreeItem, TreeItem, TreeItemRole} from "./TreeItem";
-import './Tree.scss';
+import {TreeItemInterface, TreeItem, TreeItemRole} from "./TreeItem";
+import classes from './Tree.module.scss';
 
 interface TreeProps {
-    items: ITreeItem[],
-    onClickHandler: (role: TreeItemRole, id: number) => void;
+    items: TreeItemInterface[],
+    onIconClick: (role: TreeItemRole, id: number) => void;
+    onItemClick: (role: TreeItemRole, id: number) => void;
 }
 
-export const Tree = ({items, onClickHandler}: TreeProps) => {
+export const Tree = ({items, onIconClick, onItemClick}: TreeProps) => {
     return (
-        <div className="tree_wrapper">
+        <div className={classes.tree_wrapper}>
             {
-                items.map((i) => <TreeItem key={i.id} item={i} onClickHandler={onClickHandler}/>)
+                items.map((i) => <TreeItem key={i.id} item={i} onIconClick={onIconClick} onClickHandler={onItemClick}/>)
             }
         </div>
     );
