@@ -22,7 +22,7 @@ const sidebarSlice = createSlice({
                 state.menuItems = action.payload.map((item: any) => ({
                     id: item.id,
                     title: item.title,
-                    role: 'catalog',
+                    deep: '1',
                     children: [],
                     isLast: false
                 }));
@@ -40,7 +40,7 @@ const sidebarSlice = createSlice({
                         ...item, children: action.payload.data.map((item: any) => ({
                             id: item.id,
                             title: item.title,
-                            role: 'section',
+                            deep: '2',
                             children: [],
                             isLast: false
                         }))
@@ -58,7 +58,7 @@ const sidebarSlice = createSlice({
                 const newChildren = action.payload.data.map((item: any) => ({
                     id: item.id,
                     title: item.title,
-                    role: 'article',
+                    deep: '3',
                     children: [],
                     isLast: true
                 }))
