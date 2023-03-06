@@ -6,7 +6,7 @@ import {Tree} from "07-shared/ui/Tree/ui/Tree";
 import {fetchCatalogThunk} from "./../model/services/fetchCatalogs/fetchCatalog.thunk";
 import {TreeItemRole} from "07-shared/ui/Tree/ui/TreeItem";
 import {useAppDispatch, useAppSelector} from '07-shared/hooks/appHooks';
-import {getMenuItems} from "04-widgets/Sidebar/model/selectors/sidebar.selectors";
+import {getMenuItems, getSidebarIsLoading} from "04-widgets/Sidebar/model/selectors/sidebar.selectors";
 import {fetchSections} from "04-widgets/Sidebar/model/services/fetchSections/fetchSections.thunk";
 import {fetchArticle} from "04-widgets/Sidebar/model/services/fetchArticleThunk/fetchArticle.thunk";
 
@@ -17,6 +17,7 @@ interface SidebarProps {
 export const Sidebar = ({className = ''}: SidebarProps) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const isLoading = useAppSelector(getSidebarIsLoading);
     const menuItems = useAppSelector(getMenuItems);
 
     useEffect(() => {
@@ -24,7 +25,6 @@ export const Sidebar = ({className = ''}: SidebarProps) => {
     }, []);
 
     const onIconClick = (path: TreeItemRole, id: number) => {
-        console.log(path, id)
         switch (path) {
             case "catalog":
                 dispatch(fetchSections(id));
@@ -33,7 +33,6 @@ export const Sidebar = ({className = ''}: SidebarProps) => {
                 dispatch(fetchArticle(id));
                 return;
             case "article":
-                // dispatch()
                 return;
             default:
                 return;
@@ -62,6 +61,7 @@ export const Sidebar = ({className = ''}: SidebarProps) => {
                 <Link to={'/main'}>Main</Link>
                 <Tree
                     items={menuItems}
+                    isLoading={isLoading}
                     onIconClick={onIconClick}
                     onItemClick={onItemClick}
                 />
