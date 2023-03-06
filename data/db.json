@@ -2,80 +2,107 @@
   "catalogs": [
     {
       "id": 1,
-      "title": "catalog 1",
-      "description": "catalog 1 description"
-    },
-    {
-      "title": "catalog 3",
-      "id": 3,
-      "description": "catalog 3 description"
+      "title": "Frontend",
+      "description": "Конспекты по основным UI технологиям и библиотекам"
     }
   ],
   "sections": [
     {
-      "title": "section 1 title",
+      "title": "Webpack",
       "catalog_id": 1,
       "id": 1
-    },
-    {
-      "id": 2,
-      "catalog_id": 1,
-      "title": "sections 1"
-    },
-    {
-      "id": 3,
-      "catalog_id": 3,
-      "title": "sections 1"
-    },
-    {
-      "catalog_id": 3,
-      "title": "article for page 2",
-      "id": 5
     }
   ],
   "articles": [
     {
       "id": 1,
       "section_id": 1,
-      "title": "article 1",
-      "text": "***Lorem*** Lorem ipsum dolor sit amet, consectetur adipisicing elit. \\n' +\n        '```\\nbody {\\n    color:\\'red\\';\\n}```\\n A, ad amet aperiam beatae [link](\\'https://www.google.com/\\')' +\n        '\\n deleniti doloribus enim eum fuga hic id illo, ' +\n        '\\n iusto laudantium maxime, modi nobis quibusdam sunt suscipit tempora! \\n```\\nconst y = 8;\\n``` ' +\n        '***Dolor sit*** \\n Lorem ipsum dolor sit amet, consectetur adipisicing \\n' +\n        'elit [link2](\\'https://www.google.com/\\'). ",
+      "title": "Начало работы Webpack",
+      "text": "***Webpack***\n Webpack - программа сборщик, собирает модули в файл(ы), определённого в настройках вида.\nWebpack-у - необходимо иметь входную точку, что бы построить граф зависимостей перед тем,\nкак начать сборку. 5 версия работает в браузерах ES5+, и с Node 10+. Так же сам транспилирует,\nмодули ES2015 под браузеры в бандле.\n\nЗачем: \n1) Собирает множество файлов которые зависят друг от друга в 1 минифицированый, \nпозволяя использовать все виды импортов\n2) Позволяет работать с разными типами файлов за счёт лоадеров и плагинов\n\nГраф зависимостей - структура, которую рекурсивно строит webpack, что бы при сборке собрать \nвсе необходимые для нашего приложения зависимости, файлы и модули в бандл для браузера.\n\nУстанавливаем webpack и webpack-cli (для работы через терминал)\n```\nnpm i -D webpack webpack-cli\n```\nЗапускаем: npx webpack (с флагом --production - минифицированный, --development - нет, \n--watch следит за изменениями файлов, при изменении пересобирает, но не обновляет в браузере), все настройки при этом по-умолчанию\n\n```\nnpx webpack\n```",
       "tags": [
-        1,
-        2
+        4
       ]
     },
     {
       "id": 2,
-      "title": "article 2",
-      "text": "***Webpack***\n\nКакой-то текст внутри которого [Ссылка](http://google.com), на сайт Goolge\n\n```\nconst x === 5;\n```",
       "section_id": 1,
+      "title": "Конфигурация (TypeScript)",
+      "text": "***Конфигурация***\n Вообще webpack может работать и без конфига (исп дефолтные настройки), \nно рекомендуется настраивать самому, для более гибкой и полной сборки.\n\nКонфиг может быть объектом или функцией, которая принимает объект env переменных\n* JS файл - module.exports = { конфиг }\n* JS функция - module.exports = () = { ...логика return { конфиг } }\n\n[онлайн генератор конфига](https://createapp.dev/webpack)\n\n!Важно Webpack можно (нужно) использовать с TypeScript,\nдля типизации необходимо установить следующие пакеты\n```\nnpm i -D node-ts typescript @types/webpack @types/node\n```\nИ настроить tsconfig, после чего мы можем деструктурировать конфиг \nи нам будут доступны следующие типы:\n* webpack.Configuration - конфиг файл\n* webpack.RuleSetRule[] - массив rules\n* webpack.WebpackPluginInstance[] - массив плагинов\n* webpack.ResolveOptions - resolve опции\n* и другие\n\nТак же отдельно типизируется\n```\nimport type {Configuration as DevServerConfiguration} from \"webpack-dev-server\";\n```\n",
       "tags": [
-        2
+        4
       ]
     },
     {
+      "id": 3,
       "section_id": 1,
-      "title": "article 3 new",
-      "text": "article 3 text",
-      "tags": [],
-      "id": 3
+      "title": "Работа с модулями (imports)",
+      "text": "***Модули***\n Webpack поддерживает следующие виды импортов:\n\n1) ECMAScript modules - классический import/export\n! Работая с тайпскрипт, в tscongig рекомендуется указать:\n```\n\"allowSyntheticDefaultImports\": true, // если у пакета нет default импорта, создаст его вместо * as React        \n\"esModuleInterop\": true, // Позволит импортить CommonJS как ESModule\n```\n2) CommonJS modules - \"нодовский\" module.export = {} /require()\n\n3) AMD modules - асинхронные модули, где функция define (или её аналог require) принимает первым агрументом \nмассив зависимостей из модулей, и если они присутствуют в сборке, выполняет 2-ой аргумент,\ncallback. Сама функция define определена в пакете-загрузчике, таких как RequireJS, который\nвам придётся использовать, если вы хотите использовать модули типа AMD.\n! В данный момент устаревает, но были оч. популярны\n```\ndefine(['jquery', 'underscore'], function ($, _) {\n    // логика\n    return\n});\n```\n\n4) Assets - @import внутри css/sass/less файлов\n```\n@import './reset.css'\n```\n\n5) WebAssembly modules - url(...) or HTML <img src=...> file.\n```\n.windows-icon {\n  background-image: url(\"../windows.png\");\n}\n```\n\n***Абсолютные пути***\nМы можем использовать абсолютные пути, для этого необходимо:\n1) Указать предпочитать абсолютный путь\n2) Указать откуда будут импортироваться модули\n```\nresolve: {\n    preferAbsolute: true,\n    modules: [paths.src, 'node_modules'],\n}\n```\n3) Если используем TypeScript, указать в tsconfig базовый url \nи директорию откуда будет начинаться абсолютный путь \n```\n\"baseUrl\": \".\",                        \n\"paths\": {\n  \"*\": [\n    \"./src/*\"\n  ],\n}, \n```",
+      "tags": [
+        4
+      ]
     },
     {
-      "section_id": 2,
-      "title": "article 4",
-      "text": "article 4 text",
-      "tags": [2],
-      "id": 4
+      "id": 4,
+      "section_id": 1,
+      "title": "Основные настройки",
+      "text": "***mode***\n mode: 'production' | 'development' | 'none' - поле необходимо для настройки сборки для определённой среды,\nпри запуске скрипта можем указать webpack --mode=development, в process.env.NODE_ENV \nпоявится установленное значение. По-умолчанию production.\n***entry***\nentry: путь к входному файлу, по-умолчанию ./src/index.js, может быть массивом \n\t(несколько точек входа, для использования чанков)\n\n* вместо строки чанка, можно передать объект, в нём настроить,dependOn - чанк, \nкоторый обязательно должен быть загружен перед текущим, который в свою очаредь \nможет быть массивом из модулей ['react', 'react-dom'], filename -имя, import - модули\nкоторые обязательно должны быть загружены перед текущим, runtime  имя в рантайме,\n***output***\noutput: путь выходного файла (может быть в строку или { path, filename }), \n по-умолчанию dist/main.js В отличие от точки входа, точка выхода может быть только\n одна, В поле pathname - необходимо указать шаблон, например\n'[name][contenthash].bundle.js', для того, что бы все имена файлов были уникальными.\n\n* output.assetModuleFilename - аналог file-loader, в данном поле пишется шаблон именования файлов в лоадерах { test: /форматы файлов/, type: 'asset/resource' }\t\n\n* output.publicPath Здесь же можно указать publicPath - url на котором будет находиться данная сборка, \"/\".\nЭто необходимо для корректной работы react-router-dom v6.8 (createBrowserRouter)\nТак же можно установить publicPath, что бы собирать сразу на серв, и передать в него значение \nenv переменной __webpack_public_path__.\t\n\n* output.clear = true - очищает out директорию перед новой сборкой, замена Clean плагина\n***target***\ntarget: свойство, которое говорит где будет разворачиваться наше приложение. ('web', 'node', ...)\n***optimization***\noptimization: поле настроек для оптимизации\n\n* При подключении сторонних библиотек их код собирается в бандл, если точек входа будет 2\n(2 бандла), по умолчанию в каждом из них будет копия библиотеки. Что бы этого избежать,\nпишем здесь splitChunks: { chunks: 'all' } - вынесет общий код в файл с пометкой vendors",
+      "tags": [
+        4
+      ]
+    },
+    {
+      "id": 5,
+      "section_id": 1,
+      "title": "Loaders (module.rules)",
+      "text": "***loaders***\n loaders: по-умолчанию, webpack собирает только js и json, для остальных форматов файлов\n\tнужны Loader-ы. Loaders прописываются в свойстве module -> rules, в виде массива\n\tloaders, с 2мя обязательными св-вами test - файлы, которые нужно трансформировать,\n\tuse - лоадер, который нужно использовать module: { rules: [ { test, use } ] }.\n\n- так же можно прописывать \"инлайн\", но устарело в webpack 5.\n- loaders могут выстраивать цепочку, и в каждый след лоадер, будет попадать преобразованный\nпредидущим модуль, НО ПО ИТОГУ WEBPACK ЖДЁТ JAVASCRIPT\n- если нам нужен импорт из node_module то используем след синтаксис import \"~package.css\"\n\n* на один формат фалов, может быть необходимость использовать несколько лоадеров,\nнапример .css - для этого, передаём в use массив loaders, который будет применён с конца\n[{ loader:'style-loader' }, { loader:'css-loader }, { loader:'sass-loader' }] - sass 1ый, \nв каждый из этих объектов можно передать опции\n\n* style-loader - помещает css в тэг style в head, можно заменить на MiniCssExtractPlugin.loader\nпри установленном mini-css-extract-plugin, и собирать css не в js а в отдельную папку\nв директории с билдом\n\n* css-loader - позволяет делать импорты вида import './styles.css', так же здесь можно\nнастроить css модули, для этого необходимо передать вместо строки css-loader, объект где\nmodules.auto - функция выбирающая файлы, подходящие для правила, \nmodules.localIdentName - шаблон для имени классов\n```\n{\n  loader: 'css-loader',\n  options: {\n    modules: {\n      auto: (resPath: string) => Boolean(resPath.includes('.module.')),\n      localIdentName: isDev\n        ? '[path][name]__[local]--[hash:base64:5]'\n        : '[hash:base64:8]',\n    },\n  },\n}\n```\n\n* sass-loader (less, scss, stylus) - позволяет компилировать css код препроцессоров\n! При использовании TypeScript для файлов со стилями, необходимо необходимо объявить типы в global.d.ts\n```\ndeclare module '/\\.(sc|sa|c)ss$/' {\n\tinterface IClassNames {\n\t\t[className: string]: string\n\t}\n\tconst classNames: IClassNames;\n\texport = classNames;\n}\n```\n\n* file-loader - позволяет работать с файлами (картинками png, jpeg etc, а так же url(path) в css) \nтак же file-loader позволяет работать со шрифтами\n! Устарел - замена asset/resource, можно указать output.assetModuleFilename: \n'images/[hash][ext][query]' - шаблон для имени и пути к статике\n```\n{\n  test: /\\.png/,\n  type: 'asset/resource'\n}\n```\n! При использовании TypeScript для файлов со стилями, необходимо объявить типы в global.d.ts\n```\ndeclare module '*.png';\ndeclare module '*.jpg';\ndeclare module '*.jpeg';\ndeclare module '*.svg' {\n\timport React from 'react';\n\n\tconst SVG: React.VFC<React.SVGProps<SVGSVGElement>>;\n\texport default SVG;\n}\n```\n* xml-loader - xml файлы , и т д. смотрим доку\n\n* ts-loader - позволяет компилировать JSX и TypeScript в JS\n\n* babel-loader - позволяет использовать пресеты babel, для компиляции,\nнужен для Jest, так как он не может работать с TS без него.\n! Обязательно должен быть перед ts-loader, иначе сборка упадёт\n```\n{\n  test: /\\.m?js$/,\n  exclude: /node_modules/,\n  use: {\n    loader: \"babel-loader\",\n    options: {\n      presets: ['@babel/preset-env']\n    }\n  }\n}\n```",
+      "tags": [
+        4
+      ]
+    },
+    {
+      "id": 5,
+      "section_id": 1,
+      "title": "Plugins",
+      "text": "plugins: - если loader используются для трансформации конкретных форматов, плагины имеют более \n\tширокие функции, например хот-релоад, отчистка директории перед сборкой, работа с HTML.\n\tпередается в виде массива экземпляров класса [new Plugin({ ...settings })].\n\n* Можно написать самому, по факту класс, с обязательным методом apply, \nи не обяз. свойсвом опции (взаимодействие в конструкторе)\n```\nclass MyPlugin{\n  apply(compiler) {\n   compiler.hooks.run.tap('MyPlugin', (compilation) => ...\n```\n* html-webpack-plugin - позволяет работать c HTML, в прод, можно минимизировать\nminify: { collapsWhitespace: true }, так же указать html шаблон { template: paths.html }и т п \n\n* copy-webpack-plugin  - позволяет скопировать в сборку файлы, которые не нужно будет компилировать,\nв настройки принимает массив объектов { from: 'path', to: 'path' } - для каждого файла\n\n* mini-css-extract-plugin - позволяет хранить css не в head html-я, а в отдельном файле\nНО НЕОБХОДИМО ПЕРЕДАТЬ В ЛОАДЕР экземпляр статического метода \nMiniCssExtractPlugin.loader, СЛЕВА, последним в очареди обработки, и в настройках плагина\nуказать pathname. Можно минимизировать и оптимизировать как и  html-webpack-plugin\n\n* webpack.ProgressPlugin - позволяет видеть в консоли логи с процентом сборки и текущим этапом\n\n* webpack-bundle-analyzer - позволяет вывести граф зависимостей с указанием размеров модулей\n\n* webpack.DefinePlugin - позволяет прокинуть глобальные переменны\n```\nnew webpack.DefinePlugin({\n  IS_DEV: isDev\n});\n```\n! при использовании TypeScript необходимо указать переменные в global.d.ts\n```\ndeclare const IS_DEV: boolean;\n```",
+      "tags": [
+        4
+      ]
+    },
+    {
+      "id": 6,
+      "section_id": 1,
+      "title": "Resolves",
+      "text": "***Resolve доп настройки webpack ***\n\t\n* Абсолютный импорт\n```\npreferAbsolute: true,\nresolve.modules: [paths.src, 'node_modules'] - массив путей, где искать модули\n```\n! При использовании TypeScript, необходимо показать TS, что мы используем абсолютные импорты:\n```\n\"baseUrl\": \".\",\n\"*\": [\n  \"./src/*\"\n],\n```\n\n* mainFiles: ['index'] - имя главного файла в модуле\n\n* resolve.alias: позволяет оптимизировать пути импортов, задать шаблоны для пути\nили подменять путь\n```\n{ \n  name(пакета): path // заменить оригинальный пакет этим (лежащим в path)\n  '@name': path.resolve(...) // заменить оригинальный путь импортов этим\n  'UI': path.resolve(__dirname, 'src', 'components', 'ui') // заменить оригинальный путь импортов этим\n}\n```\n! При использовании TypeScript, необходимо показать TS, какие используются alias:\n```\n\"baseUrl\": \".\",\n\"paths\": {\n  \"UI\": [\"src/components/ui/*\"]\n}\n```\n* extensions: ['.js', '.jsx'] - указывает разрешённые к экспорту форматы (их можно будет не указывать вручную)",
+      "tags": [
+        4
+      ]
+    },
+    {
+      "id": 6,
+      "section_id": 1,
+      "title": "Dev server",
+      "text": "***DevServer***\ndevServer: настройка позволяет сделать разработку удобнее, пересобирая код и обновляя приложение в браузере\nпри внесении изменений в файлы ! Необходим  webpack-dev-server\n\n* webpack-dev-server -пакет, необходимый для реализации, указываем путь к входному файлу СБОРКИ! и порт, \n{ path: 'dist/index.js', port: 8080 }\n\n* hot: bool - хот-релоад в зависимости от значения переменной NODE_ENV и пишем скрипт \n(webpack-dev-server --open(открывает прил в окне) --mode development --hot)\n\n* historyApiFallback: true - обязательный флаг в разработке, позволяет обновлять не домашнюю страницу в браузере,\n не получая 404 ошибку\n\n* devtool - позволяет управлять отображением source-map\n```\ndevtool: isDev ? 'inline-source-map' : undefined,\n```",
+      "tags": [
+        4
+      ]
     }
   ],
   "tags": [
     {
       "id": 1,
-      "title": "tag1"
+      "title": "build"
     },
     {
       "id": 2,
-      "title": "tag2"
+      "title": "ui"
+    },
+    {
+      "id": 3,
+      "title": "config"
+    },
+    {
+      "id": 4,
+      "title": "webpack"
     }
   ]
 }
