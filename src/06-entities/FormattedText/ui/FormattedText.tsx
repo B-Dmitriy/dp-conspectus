@@ -1,5 +1,5 @@
 import classes from './FormattedText.module.scss';
-import {Code} from "../../../07-shared/ui/Code/Code";
+import {Code} from "07-shared/ui/Code/Code";
 import React, {useMemo} from "react";
 import { parseCode } from "../lib/parseCode/parseCode";
 import { parseHeaders } from '../lib/parseHeaders/parseHeaders';
@@ -35,5 +35,5 @@ export const FormattedText = ({ text, className }: FormattedTextProps) => {
         }
     })
 
-    return <div className={`${classes.FormattedText} ${className}`}>{result}</div>;
+    return <pre className={`${classes.FormattedText} ${className}`}>{result}</pre>;
 }
