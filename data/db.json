@@ -15,6 +15,10 @@
       "title": "Babel",
       "catalog_id": 1,
       "id": 2
+    }, {
+      "title": "React",
+      "catalog_id": 1,
+      "id": 3
     }
   ],
   "articles": [
