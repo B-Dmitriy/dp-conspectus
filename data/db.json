@@ -23,13 +23,17 @@
       "catalog_id": 1,
       "id": 1
     }, {
-      "title": "React",
+      "title": "Babel",
       "catalog_id": 1,
       "id": 2
     }, {
-      "title": "Redux",
+      "title": "React",
       "catalog_id": 1,
       "id": 3
+    }, {
+      "title": "Redux",
+      "catalog_id": 1,
+      "id": 4
     }
   ],
   "articles": [
