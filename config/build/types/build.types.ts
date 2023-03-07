@@ -1,5 +1,10 @@
 export type ModeType = 'production' | 'development';
 
+export interface EnvVariables {
+    mode: ModeType,
+    port?: number;
+}
+
 export interface WebpackBuildOptions {
     mode: ModeType;
     isDev: boolean;
