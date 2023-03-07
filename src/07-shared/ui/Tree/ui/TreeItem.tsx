@@ -3,11 +3,11 @@ import classes from './TreeItem.module.scss';
 import {ArrowR} from "../../../assets/icons/ArrowR";
 import {classNames} from '07-shared/lib/classNames/classNames';
 
-export type TreeItemRole = 'catalog' | 'section' | 'article';
+export type TreeItemDeep = '1' | '2' | '3';
 
 export interface TreeItemInterface {
     id: number;
-    role: TreeItemRole;
+    deep: TreeItemDeep;
     title: string;
     children: TreeItemInterface[];
     isLast: boolean;
@@ -16,8 +16,8 @@ export interface TreeItemInterface {
 interface TreeItemProps {
     item: TreeItemInterface,
     isArrowsDisable?: boolean;
-    onIconClick: (role: TreeItemRole, id: number) => void;
-    onClickHandler: (role: TreeItemRole, id: number) => void;
+    onIconClick: (role: TreeItemDeep, id: number) => void;
+    onClickHandler: (role: TreeItemDeep, id: number) => void;
 }
 
 export const TreeItem = memo(({item, isArrowsDisable = false, onIconClick, onClickHandler}: TreeItemProps) => {
@@ -25,7 +25,7 @@ export const TreeItem = memo(({item, isArrowsDisable = false, onIconClick, onCli
 
     const onIconClickHandler = useCallback(() => {
         if (!isOpen) {
-            onIconClick(item.role, item.id);
+            onIconClick(item.deep, item.id);
             setIsOpen((prev) => !prev);
             return;
         }
@@ -33,7 +33,7 @@ export const TreeItem = memo(({item, isArrowsDisable = false, onIconClick, onCli
     }, [isOpen])
 
 
-    const onTitleClick = () => onClickHandler(item.role, item.id)
+    const onTitleClick = () => onClickHandler(item.deep, item.id)
 
     return (
         <div className={classes.treeItem}>

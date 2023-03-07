@@ -1,9 +1,20 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "name": "Dmitriy",
+      "password": "123"
+    }
+  ],
   "catalogs": [
     {
       "id": 1,
       "title": "Frontend",
       "description": "Конспекты по основным UI технологиям и библиотекам"
+    }, {
+      "id": 2,
+      "title": "Internet",
+      "description": "Общие сведения о работе сети"
     }
   ],
   "sections": [
@@ -19,6 +30,10 @@
       "title": "React",
       "catalog_id": 1,
       "id": 3
+    }, {
+      "title": "Redux",
+      "catalog_id": 1,
+      "id": 4
     }
   ],
   "articles": [
@@ -68,7 +83,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 6,
       "section_id": 1,
       "title": "Plugins",
       "text": "plugins: - если loader используются для трансформации конкретных форматов, плагины имеют более \n\tширокие функции, например хот-релоад, отчистка директории перед сборкой, работа с HTML.\n\tпередается в виде массива экземпляров класса [new Plugin({ ...settings })].\n\n* Можно написать самому, по факту класс, с обязательным методом apply, \nи не обяз. свойсвом опции (взаимодействие в конструкторе)\n```\nclass MyPlugin{\n  apply(compiler) {\n   compiler.hooks.run.tap('MyPlugin', (compilation) => ...\n```\n* html-webpack-plugin - позволяет работать c HTML, в прод, можно минимизировать\nminify: { collapsWhitespace: true }, так же указать html шаблон { template: paths.html }и т п \n\n* copy-webpack-plugin  - позволяет скопировать в сборку файлы, которые не нужно будет компилировать,\nв настройки принимает массив объектов { from: 'path', to: 'path' } - для каждого файла\n\n* mini-css-extract-plugin - позволяет хранить css не в head html-я, а в отдельном файле\nНО НЕОБХОДИМО ПЕРЕДАТЬ В ЛОАДЕР экземпляр статического метода \nMiniCssExtractPlugin.loader, СЛЕВА, последним в очареди обработки, и в настройках плагина\nуказать pathname. Можно минимизировать и оптимизировать как и  html-webpack-plugin\n\n* webpack.ProgressPlugin - позволяет видеть в консоли логи с процентом сборки и текущим этапом\n\n* webpack-bundle-analyzer - позволяет вывести граф зависимостей с указанием размеров модулей\n\n* webpack.DefinePlugin - позволяет прокинуть глобальные переменны\n```\nnew webpack.DefinePlugin({\n  IS_DEV: isDev\n});\n```\n! при использовании TypeScript необходимо указать переменные в global.d.ts\n```\ndeclare const IS_DEV: boolean;\n```",
@@ -77,7 +92,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 7,
       "section_id": 1,
       "title": "Resolves",
       "text": "***Resolve доп настройки webpack ***\n\t\n* Абсолютный импорт\n```\npreferAbsolute: true,\nresolve.modules: [paths.src, 'node_modules'] - массив путей, где искать модули\n```\n! При использовании TypeScript, необходимо показать TS, что мы используем абсолютные импорты:\n```\n\"baseUrl\": \".\",\n\"*\": [\n  \"./src/*\"\n],\n```\n\n* mainFiles: ['index'] - имя главного файла в модуле\n\n* resolve.alias: позволяет оптимизировать пути импортов, задать шаблоны для пути\nили подменять путь\n```\n{ \n  name(пакета): path // заменить оригинальный пакет этим (лежащим в path)\n  '@name': path.resolve(...) // заменить оригинальный путь импортов этим\n  'UI': path.resolve(__dirname, 'src', 'components', 'ui') // заменить оригинальный путь импортов этим\n}\n```\n! При использовании TypeScript, необходимо показать TS, какие используются alias:\n```\n\"baseUrl\": \".\",\n\"paths\": {\n  \"UI\": [\"src/components/ui/*\"]\n}\n```\n* extensions: ['.js', '.jsx'] - указывает разрешённые к экспорту форматы (их можно будет не указывать вручную)",
@@ -86,7 +101,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 8,
       "section_id": 1,
       "title": "Dev server",
       "text": "***DevServer***\ndevServer: настройка позволяет сделать разработку удобнее, пересобирая код и обновляя приложение в браузере\nпри внесении изменений в файлы ! Необходим  webpack-dev-server\n\n* webpack-dev-server -пакет, необходимый для реализации, указываем путь к входному файлу СБОРКИ! и порт, \n{ path: 'dist/index.js', port: 8080 }\n\n* hot: bool - хот-релоад в зависимости от значения переменной NODE_ENV и пишем скрипт \n(webpack-dev-server --open(открывает прил в окне) --mode development --hot)\n\n* historyApiFallback: true - обязательный флаг в разработке, позволяет обновлять не домашнюю страницу в браузере,\n не получая 404 ошибку\n\n* devtool - позволяет управлять отображением source-map\n```\ndevtool: isDev ? 'inline-source-map' : undefined,\n```",
