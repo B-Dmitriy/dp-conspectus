@@ -1,13 +1,7 @@
 import path from "path";
 import webpack from "webpack";
 import {buildWebpackConfig} from "./config/build/buildWebpackConfig";
-import {ModeType} from "./config/build/types/build.types";
-
-
-interface EnvVariables {
-    mode: ModeType,
-    port?: number;
-}
+import {EnvVariables} from "./config/build/types/build.types";
 
 export default (env: EnvVariables): webpack.Configuration => {
     const MODE = env.mode || "production";

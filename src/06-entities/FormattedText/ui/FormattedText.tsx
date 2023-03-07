@@ -19,19 +19,19 @@ export const FormattedText = ({ text, className }: FormattedTextProps) => {
     const parsedDocument = parser.parseFromString(formattedString, 'text/html');
     const nodes = parsedDocument.body.childNodes;
 
-    nodes.forEach((node: ChildNode) => {
+    nodes.forEach((node: ChildNode, key) => {
         if(node.nodeName === FormattedTextTags.H3) {
-            result.push(<h3>{node.textContent}</h3>)
+            result.push(<h3 key={key}>{node.textContent}</h3>)
         }
         if(node.nodeName === FormattedTextTags.TEXT) {
-            result.push(<span>{node.textContent}</span>)
+            result.push(<span key={key}>{node.textContent}</span>)
         }
         if(node.nodeName === FormattedTextTags.A) {
             // @ts-ignore
-            result.push(<a href={node.href || ''}>{node.textContent}</a>)
+            result.push(<a key={key} href={node.href || ''}>{node.textContent}</a>)
         }
         if(node.nodeName === FormattedTextTags.PRE) {
-            result.push(<Code content={node.textContent} />)
+            result.push(<Code key={key} content={node.textContent} />)
         }
     })
 
