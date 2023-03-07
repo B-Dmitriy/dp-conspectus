@@ -11,6 +11,10 @@
       "title": "Webpack",
       "catalog_id": 1,
       "id": 1
+    }, {
+      "title": "Babel",
+      "catalog_id": 1,
+      "id": 2
     }
   ],
   "articles": [
