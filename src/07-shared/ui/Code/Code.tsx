@@ -7,11 +7,10 @@ interface CodeProps {
     className?: string;
 }
 
-export const Code = ({content, className}: CodeProps) => {
-
+export function Code({ content, className }: CodeProps) {
     return (
         <pre className={`${classes.Code} ${className}`}>
             {content}
         </pre>
     );
-};
+}

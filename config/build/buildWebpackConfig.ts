@@ -1,12 +1,12 @@
-import webpack from "webpack";
-import {WebpackBuildOptions} from "./types/build.types";
-import {buildWebpackPlugins} from "./buildWebpackPlugins";
-import {buildWebpackRules} from "./buildWebpackRules";
-import {buildWebpackDevServer} from "./buildWebpackDevServer";
-import {buildWebpackResolve} from "./buildWebpackResolve";
+import webpack from 'webpack';
+import { WebpackBuildOptions } from './types/build.types';
+import { buildWebpackPlugins } from './buildWebpackPlugins';
+import { buildWebpackRules } from './buildWebpackRules';
+import { buildWebpackDevServer } from './buildWebpackDevServer';
+import { buildWebpackResolve } from './buildWebpackResolve';
 
 export function buildWebpackConfig(options: WebpackBuildOptions): webpack.Configuration {
-    const {mode, isDev, paths} = options;
+    const { mode, isDev, paths } = options;
 
     return {
         mode,
@@ -16,6 +16,7 @@ export function buildWebpackConfig(options: WebpackBuildOptions): webpack.Config
             path: paths.output,
             publicPath: '/',
             clean: true,
+            assetModuleFilename: 'images/[hash][ext][query]',
         },
         resolve: buildWebpackResolve(options),
         plugins: buildWebpackPlugins(options),
@@ -24,5 +25,5 @@ export function buildWebpackConfig(options: WebpackBuildOptions): webpack.Config
         },
         devServer: isDev ? buildWebpackDevServer(options) : undefined,
         devtool: isDev ? 'inline-source-map' : undefined,
-    }
+    };
 }

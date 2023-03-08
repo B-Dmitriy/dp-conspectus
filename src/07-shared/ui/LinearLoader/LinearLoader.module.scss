@@ -1,47 +1,47 @@
 @keyframes linear {
-  0% {
-    left: -10%;
-    width: 0;
-  }
+    0% {
+        left: -10%;
+        width: 0;
+    }
 
-  25% {
-    left: 25%;
-    width: 25%;
-  }
+    25% {
+        left: 25%;
+        width: 25%;
+    }
 
-  50% {
-    left: 50%;
-    width: 50%;
-  }
+    50% {
+        left: 50%;
+        width: 50%;
+    }
 
-  75% {
-    left: 75%;
-    width: 25%;
-  }
+    75% {
+        left: 75%;
+        width: 25%;
+    }
 
-  100% {
-    left: 100%;
-    width: 0;
-  }
+    100% {
+        left: 100%;
+        width: 0;
+    }
 }
 
 .loader {
-  height: 8px;
-  width: 100%;
-  position: relative;
-  background-color: transparent;
+    height: 8px;
+    width: 100%;
+    position: relative;
+    background-color: transparent;
 
-  .block {
-    position: absolute;
-    height: 100%;
-    overflow: hidden;
-    background-color: gray;
+    .block {
+        position: absolute;
+        height: 100%;
+        overflow: hidden;
+        background-color: gray;
 
-    &.loading {
-      animation-name: linear;
-      animation-iteration-count: infinite;
-      animation-duration: 0.6s;
-      animation-timing-function: linear;
+        &.loading {
+            animation-name: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 0.6s;
+            animation-timing-function: linear;
+        }
     }
-  }
 }

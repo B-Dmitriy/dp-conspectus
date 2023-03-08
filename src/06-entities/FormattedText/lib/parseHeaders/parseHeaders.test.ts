@@ -1,4 +1,4 @@
-import {parseHeaders} from "./parseHeaders";
+import { parseHeaders } from './parseHeaders';
 
 describe('parseHeaders', () => {
     test('correct string parsed', () => {

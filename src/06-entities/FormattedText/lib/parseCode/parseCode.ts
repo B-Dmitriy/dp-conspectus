@@ -4,9 +4,9 @@ export const parseCode = (str: string): string => {
         if (codes && codes.length) {
             codes.forEach((code) => {
                 str = str.replace(code, `<pre>${code.slice(3, -3)}</pre>`);
-            })
+            });
         }
         return str;
     }
     return str;
-}
+};
