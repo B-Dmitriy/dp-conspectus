@@ -1,8 +1,9 @@
-import {WebpackBuildOptions} from "./types/build.types";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import webpack from "webpack";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import { WebpackBuildOptions } from './types/build.types';
 
 export function buildWebpackPlugins(options: WebpackBuildOptions): webpack.WebpackPluginInstance[] {
     const { paths, isDev } = options;
@@ -10,23 +11,29 @@ export function buildWebpackPlugins(options: WebpackBuildOptions): webpack.Webpa
     const progressPlugin = new webpack.ProgressPlugin();
 
     const htmlPlugin = new HtmlWebpackPlugin({
-        template: paths.html
+        template: paths.html,
     });
 
     const miniCssPlugin = new MiniCssExtractPlugin({
-        filename: "css/[name].css",
-        chunkFilename: "css/[id].css",
+        filename: 'css/[name].css',
+        chunkFilename: 'css/[id].css',
     });
 
     const bundleAnalisePlugin = new BundleAnalyzerPlugin({
         openAnalyzer: false,
         reportTitle: () => {
             const date = new Date();
-            return `DP-conspectus ${date.toLocaleDateString()}`
+            return `DP-conspectus ${date.toLocaleDateString()}`;
         },
     });
 
-    const plugins: webpack.WebpackPluginInstance[] = [htmlPlugin, progressPlugin];
+    const definePlugin = new webpack.DefinePlugin({
+        __IS_DEV__: isDev,
+    });
+
+    const reactRefreshWebpackPlugin = new ReactRefreshWebpackPlugin();
+
+    const plugins: webpack.WebpackPluginInstance[] = [htmlPlugin, progressPlugin, definePlugin];
 
     if (!isDev) {
         plugins.push(miniCssPlugin);
@@ -34,6 +41,7 @@ export function buildWebpackPlugins(options: WebpackBuildOptions): webpack.Webpa
 
     if (isDev) {
         plugins.push(bundleAnalisePlugin);
+        plugins.push(reactRefreshWebpackPlugin);
     }
 
     return plugins;

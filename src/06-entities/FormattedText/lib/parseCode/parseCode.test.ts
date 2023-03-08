@@ -1,4 +1,4 @@
-import {parseCode} from "./parseCode";
+import { parseCode } from './parseCode';
 
 describe('parseCode', () => {
     test('correct string parsed', () => {

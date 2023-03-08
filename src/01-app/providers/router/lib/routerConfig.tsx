@@ -1,10 +1,10 @@
-import {createBrowserRouter} from "react-router-dom";
-import NotFound from "03-pages/NotFound";
-import {Section} from "03-pages/Section";
-import {Catalog} from "03-pages/Catalog";
-import {Main} from "03-pages/Main";
-import Article from "03-pages/Article";
-import Layout from "../ui/Layout/Layout";
+import { createBrowserRouter } from 'react-router-dom';
+import NotFound from '03-pages/NotFound';
+import { Section } from '03-pages/Section';
+import { Catalog } from '03-pages/Catalog';
+import { Main } from '03-pages/Main';
+import Article from '03-pages/Article';
+import Layout from '../ui/Layout/Layout';
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -25,23 +25,23 @@ export const RoutePaths: Record<AppRoutes, string> = {
 export const routerConfig = createBrowserRouter([
     {
         path: '/',
-        element: <Layout/>,
+        element: <Layout />,
         children: [{
             path: RoutePaths.main,
-            element: <Main/>,
+            element: <Main />,
         }, {
             path: RoutePaths.catalog,
-            element: <Catalog/>,
+            element: <Catalog />,
         }, {
             index: true,
             path: RoutePaths.section,
-            element: <Section/>,
+            element: <Section />,
         }, {
             path: RoutePaths.article,
-            element: <Article/>,
+            element: <Article />,
         }, {
             path: RoutePaths.not_found,
-            element: <NotFound/>,
-        }]
+            element: <NotFound />,
+        }],
     },
-])
+]);

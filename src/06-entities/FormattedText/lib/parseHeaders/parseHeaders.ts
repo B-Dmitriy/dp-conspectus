@@ -5,9 +5,9 @@ export const parseHeaders = (str: string): string => {
         if (headers && headers.length) {
             headers.forEach((header) => {
                 str = str.replace(header, `<h3>${header.slice(3, -3)}</h3>`);
-            })
+            });
         }
         return str;
     }
     return str;
-}
+};

@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {FormattedText} from "06-entities/FormattedText";
+import React, { useState } from 'react';
+import { FormattedText } from '06-entities/FormattedText';
 
-export const Main = () => {
+export function Main() {
     const [text, setText] = useState('');
     return (
         <div>
-            <textarea value={text} onChange={(e) => setText(e.target.value)}/>
-            <hr/>
+            <textarea value={text} onChange={(e) => setText(e.target.value)} />
+            <hr />
             <FormattedText text={text} />
         </div>
     );
-};
+}

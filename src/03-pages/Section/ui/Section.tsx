@@ -5,7 +5,7 @@ interface SectionProps {
     className?: string;
 }
 
-export const Section = ({ className = '' }: SectionProps) => {
+export function Section({ className }: SectionProps) {
     return (
         <div className={classNames(classes.Section, {}, [className])}>
             Section

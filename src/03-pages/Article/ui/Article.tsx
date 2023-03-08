@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Article = () => {
+function Article() {
     return (
-        <div style={{ backgroundColor: 'cyan'}}>
+        <div style={{ backgroundColor: 'cyan' }}>
             Article
         </div>
     );
-};
+}
 
 export default Article;

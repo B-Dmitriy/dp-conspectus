@@ -27,7 +27,7 @@
 }
 
 .treeItem__arrow svg {
-    transform: rotate(-90deg);
+    transform: rotate(0deg);
     transition: .3s;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .treeItem__arrow_open svg {
-    transform: rotate(0deg);
+    transform: rotate(90deg);
 }
 
 .treeItem__title {
@@ -48,29 +48,26 @@
 }
 
 .treeItem__title:hover {
-    background-color: darkgrey;
+    background-color: lightcyan;
 }
-.treeItem__title:hover .item__title__toolbar {
-    display: block;
-}
-
 
 .item__title__toolbar {
     display: none;
     margin-left: auto;
 }
 
-.treeItem__title_withoutArrow {
-    margin-left: 24px;
+.treeItem__title:hover .item__title__toolbar {
+    display: block;
 }
 
-.treeItem__title:hover {
-    background-color: lightcyan;
+.treeItem__title_withoutArrow {
+    margin-left: 24px;
 }
 
 .noData {
     margin-left: 24px;
 }
+
 @keyframes drop {
     from {
         z-index: -1;

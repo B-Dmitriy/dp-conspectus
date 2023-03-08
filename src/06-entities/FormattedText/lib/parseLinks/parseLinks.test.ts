@@ -1,4 +1,4 @@
-import {parseLinks} from "./parseLinks";
+import { parseLinks } from './parseLinks';
 
 describe('parseCode', () => {
     test('correct string parsed', () => {
