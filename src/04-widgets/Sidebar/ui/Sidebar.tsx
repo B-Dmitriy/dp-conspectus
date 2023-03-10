@@ -1,5 +1,5 @@
 import { classNames } from '07-shared/lib/classNames/classNames';
-import { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Tree } from '07-shared/ui/Tree/ui/Tree';
 import { TreeItemDeep } from '07-shared/ui/Tree/ui/TreeItem';
@@ -19,6 +19,10 @@ export function Sidebar({ className }: SidebarProps) {
     const navigate = useNavigate();
     const isLoading = useAppSelector(getSidebarIsLoading);
     const menuItems = useAppSelector(getMenuItems);
+
+    const [isRolled, setIsRolled] = useState<boolean>(false);
+
+    const toggleSidebar = () => setIsRolled((prev) => !prev);
 
     useEffect(() => {
         dispatch(fetchCatalogThunk());
@@ -56,15 +60,18 @@ export function Sidebar({ className }: SidebarProps) {
     };
 
     return (
-        <div className={classNames(classes.Sidebar, {}, [className])}>
+        <div className={classNames(classes.Sidebar, {
+            [classes.rolled]: isRolled,
+        }, [className])}>
             <section className={classes.menu}>
+                <button onClick={toggleSidebar}>Toggle</button>
                 <Link to="/main">Main</Link>
-                <Tree
+                {!isRolled && <Tree
                     items={menuItems}
                     isLoading={isLoading}
                     onIconClick={onIconClick}
                     onItemClick={onItemClick}
-                />
+                />}
             </section>
         </div>
     );
