@@ -1,23 +1,26 @@
 .treeItem {
     width: 100%;
+
     text-align: start;
     background-color: lightgray;
 }
 
 .treeItem__header {
-    display: flex;
     width: 100%;
+
+    display: flex;
     align-items: center;
 }
 
 
 .treeItem__arrow {
+    padding: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent;
     border: none;
-    padding: 0;
 }
 
 .disabled {
@@ -40,11 +43,13 @@
 }
 
 .treeItem__title {
+    width: 100%;
+
+    line-height: 24px;
+
     display: flex;
     justify-content: space-between;
-    width: 100%;
     cursor: pointer;
-    line-height: 24px;
 }
 
 .treeItem__title:hover {
@@ -83,8 +88,9 @@
 }
 
 .treeItem__children {
+    height: 100%;
+
     animation-name: drop;
     animation-duration: .2s;
-    height: 100%;
     margin-left: 12px;
 }
