@@ -28,8 +28,8 @@ export function FormattedText({ text, className }: FormattedTextProps) {
             result.push(<span key={id}>{node.textContent}</span>);
         }
         if (node.nodeName === FormattedTextTags.A) {
-            // @ts-ignore
-            result.push(<a key={id} href={node.href || ''}>{node.textContent}</a>);
+            const anchor = node as HTMLAnchorElement;
+            result.push(<a key={id} href={anchor.href || ''}>{anchor.textContent}</a>);
         }
         if (node.nodeName === FormattedTextTags.PRE) {
             result.push(<Code key={id} content={node.textContent} />);

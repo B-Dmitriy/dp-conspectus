@@ -1,19 +1,19 @@
 .Sidebar {
-    width: var(--sidebar-width);
+  width: var(--sidebar-width);
 
+  transition: var(--transition-slow);
+
+  &.rolled {
+    width: var(--sidebar-rolled);
+  }
+
+  .menu {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    background-color: blanchedalmond;
     transition: var(--transition-slow);
-
-    &.rolled {
-        width: var(--sidebar-rolled);
-    }
-
-    .menu {
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        flex-direction: column;
-        background-color: blanchedalmond;
-        transition: var(--transition-slow);
-    }
+  }
 }
