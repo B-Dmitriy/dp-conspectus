@@ -1,7 +1,51 @@
 {
-  "extends": "stylelint-config-standard-scss",
+  "extends": [
+    "stylelint-config-standard-scss"
+  ],
+  "plugins": [
+    "stylelint-order"
+  ],
   "rules": {
-    "indentation": [4],
-    "selector-class-pattern": null
+    "indentation": [
+      4
+    ],
+    "selector-class-pattern": null,
+    "declaration-empty-line-before": null,
+    "order/order": [
+      "custom-properties",
+      "declarations"
+    ],
+    "order/properties-order": [
+      [
+        {
+          "groupName": "size",
+          "noEmptyLineBetween": true,
+          "emptyLineBefore": "always",
+          "properties": [
+            "width",
+            "height",
+            "margin",
+            "padding"
+          ]
+        },
+        {
+          "groupName": "font",
+          "noEmptyLineBetween": true,
+          "emptyLineBefore": "always",
+          "properties": [
+            "font-family",
+            "font-size",
+            "font-weight",
+            "letter-spacing",
+            "line-height",
+            "color"
+          ]
+        }
+      ],
+      {
+        "unspecified": "bottom",
+        "emptyLineBeforeUnspecified": "always"
+      }
+    ]
   }
 }
