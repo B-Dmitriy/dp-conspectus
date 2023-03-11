@@ -11,7 +11,7 @@ interface LayoutProps {
 
 function Layout({ className }: LayoutProps) {
     return (
-        <div className={classNames(classes.Layout, {}, [className])}>
+        <div className={classNames(classes.Layout, {}, [className, 'light'])}>
             <Navbar />
             <div className={classes.container}>
                 <Sidebar />

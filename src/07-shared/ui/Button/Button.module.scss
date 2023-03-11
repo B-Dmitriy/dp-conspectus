@@ -1,0 +1,22 @@
+.Button {
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.clear {
+    background: none;
+    border: none;
+  }
+
+  &.primary {
+    border-color: red;
+  }
+
+  &.secondary {
+    border-color: blue;
+  }
+
+  &.outline {
+    background: none;
+  }
+}

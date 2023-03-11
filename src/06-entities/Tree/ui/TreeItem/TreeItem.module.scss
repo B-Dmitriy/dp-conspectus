@@ -50,6 +50,11 @@
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+
+  .buttonChild {
+    display: flex;
+    align-items: start;
+  }
 }
 
 .treeItem__title:hover {
@@ -62,7 +67,7 @@
 }
 
 .treeItem__title:hover .item__title__toolbar {
-  display: block;
+  display: flex;
 }
 
 .treeItem__title_withoutArrow {

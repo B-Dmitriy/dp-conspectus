@@ -11,8 +11,8 @@
     "eslint": "eslint \"**/*.{ts,tsx}\"",
     "eslint:fix": "eslint --fix \"**/*.{ts,tsx}\"",
     "stylelint": "npx stylelint \"**/*.{css,scss,sass}\"",
-    "stylelint:fix": "npx stylelint --fix \"**/*.{css,scss,sass}\"",
-    "test": "jest"
+    "stylelint:fix": "npx stylelint --fix \"src/**/*.{css,scss,sass}\"",
+    "test:unit": "jest --config \"./config/jest/jest.config.ts\" --coverage"
   },
   "repository": {
     "type": "git",

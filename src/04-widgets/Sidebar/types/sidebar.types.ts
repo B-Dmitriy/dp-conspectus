@@ -1,4 +1,4 @@
-import { TreeItemInterface } from '07-shared/ui/Tree/ui/TreeItem';
+import { TreeItemInterface } from '06-entities/Tree/ui/TreeItem/TreeItem';
 
 export interface SidebarState {
     isLoading: boolean;

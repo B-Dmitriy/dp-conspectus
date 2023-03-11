@@ -1,12 +1,13 @@
 import { classNames } from '07-shared/lib/classNames/classNames';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Tree } from '07-shared/ui/Tree/ui/Tree';
-import { TreeItemDeep } from '07-shared/ui/Tree/ui/TreeItem';
+import { Tree } from '06-entities/Tree/ui/Tree/Tree';
+import { TreeItemDeep } from '06-entities/Tree/ui/TreeItem/TreeItem';
 import { useAppDispatch, useAppSelector } from '07-shared/hooks/appHooks';
 import { getMenuItems, getSidebarIsLoading } from '04-widgets/Sidebar/model/selectors/sidebar.selectors';
 import { fetchSections } from '04-widgets/Sidebar/model/services/fetchSections/fetchSections.thunk';
 import { fetchArticle } from '04-widgets/Sidebar/model/services/fetchArticleThunk/fetchArticle.thunk';
+import { Button } from '07-shared/ui/Button/Button';
 import { fetchCatalogThunk } from '../model/services/fetchCatalogs/fetchCatalog.thunk';
 import classes from './Sidebar.module.scss';
 
@@ -62,16 +63,19 @@ export function Sidebar({ className }: SidebarProps) {
     return (
         <div className={classNames(classes.Sidebar, {
             [classes.rolled]: isRolled,
-        }, [className])}>
+        }, [className])}
+        >
             <section className={classes.menu}>
-                <button onClick={toggleSidebar}>Toggle</button>
+                <Button view="primary" onClick={toggleSidebar}>Toggle</Button>
                 <Link to="/main">Main</Link>
-                {!isRolled && <Tree
-                    items={menuItems}
-                    isLoading={isLoading}
-                    onIconClick={onIconClick}
-                    onItemClick={onItemClick}
-                />}
+                {!isRolled && (
+                    <Tree
+                        items={menuItems}
+                        isLoading={isLoading}
+                        onIconClick={onIconClick}
+                        onItemClick={onItemClick}
+                    />
+                )}
             </section>
         </div>
     );

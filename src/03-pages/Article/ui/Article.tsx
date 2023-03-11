@@ -1,5 +1,5 @@
 import React from 'react';
-import {PageLoader} from '07-shared/ui/PageLoader/PageLoader';
+import { PageLoader } from '07-shared/ui/PageLoader/PageLoader';
 
 function Article() {
     return (

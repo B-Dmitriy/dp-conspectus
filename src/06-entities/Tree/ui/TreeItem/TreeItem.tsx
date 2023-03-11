@@ -1,7 +1,8 @@
 import React, { memo, useCallback, useState } from 'react';
 import { classNames } from '07-shared/lib/classNames/classNames';
+import { Button } from '07-shared/ui/Button/Button';
 import classes from './TreeItem.module.scss';
-import Arrow from '../../../assets/icons/arrow-right.svg';
+import Arrow from '../../../../07-shared/assets/icons/arrow-right.svg';
 
 export type TreeItemDeep = '1' | '2' | '3';
 
@@ -40,8 +41,8 @@ export const TreeItem = memo(({
         <div className={classes.treeItem}>
             <div className={classes.treeItem__header}>
                 {!item.isLast && (
-                    <button
-                        type="button"
+                    <Button
+                        view="clear"
                         disabled={isArrowsDisable}
                         className={classNames(classes.treeItem__arrow, {
                             [classes.treeItem__arrow_open]: isOpen,
@@ -50,24 +51,31 @@ export const TreeItem = memo(({
                         onClick={onIconClickHandler}
                     >
                         {item.children && <Arrow />}
-                    </button>
+                    </Button>
                 )}
                 <span
                     className={`${classes.treeItem__title} ${(item.isLast && !item.children.length)
                         ? classes.treeItem__title_withoutArrow
                         : ''}`}
                 >
-                    <button type="button" onClick={onTitleClick}>{item.title}</button>
+                    <Button
+                        className={classes.buttonChild}
+                        fullWidth
+                        view="clear"
+                        onClick={onTitleClick}
+                    >
+                        {item.title}
+                    </Button>
                     <span className={classes.item__title__toolbar}>
-                        <button type="button">+</button>
-                        <button type="button">d</button>
+                        <Button view="clear">+</Button>
+                        <Button view="clear">d</Button>
                     </span>
                 </span>
             </div>
             {isOpen && (
                 <div className={classes.treeItem__children}>
                     {item.children !== null && item.children.length < 1
-                      && <span className={classes.noData}>No data inside</span>}
+                        && <span className={classes.noData}>No data inside</span>}
                     {item.children !== null && item.children.map((i) => (
                         <TreeItem
                             key={i.id}
