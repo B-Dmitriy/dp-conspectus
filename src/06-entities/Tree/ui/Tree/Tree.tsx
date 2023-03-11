@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinearLoader } from '07-shared/ui/LinearLoader/LinearLoader';
-import { TreeItem, TreeItemDeep, TreeItemInterface } from './TreeItem';
 import classes from './Tree.module.scss';
+import { TreeItem, TreeItemDeep, TreeItemInterface } from '../TreeItem/TreeItem';
 
 interface TreeProps {
     items: TreeItemInterface[],

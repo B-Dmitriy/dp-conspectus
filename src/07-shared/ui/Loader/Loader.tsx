@@ -1,10 +1,8 @@
 import React from 'react';
 import classes from './Loader.module.scss';
 
-export const Loader = () => {
-    return (
-        <div className={classes.Loader}>
-            <div className={classes.ldsDualRing}></div>
-        </div>
-    );
-};
+export const Loader = () => (
+    <div className={classes.Loader}>
+        <div className={classes.ldsDualRing} />
+    </div>
+);
