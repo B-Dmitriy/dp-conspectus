@@ -4,13 +4,16 @@ import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { StoreProvider } from '01-app/providers/store';
 import { Router } from '01-app/providers/router';
+import { ErrorBoundary } from '01-app/providers/ErrorBoundary/ui/ErrorBoundary';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-    <StoreProvider>
-        <Suspense fallback="">
-            <Router />
-        </Suspense>
-    </StoreProvider>,
+    <ErrorBoundary>
+        <StoreProvider>
+            <Suspense fallback="">
+                <Router />
+            </Suspense>
+        </StoreProvider>
+    </ErrorBoundary>,
 );

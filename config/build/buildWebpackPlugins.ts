@@ -31,7 +31,9 @@ export function buildWebpackPlugins(options: WebpackBuildOptions): webpack.Webpa
         __IS_DEV__: isDev,
     });
 
-    const reactRefreshWebpackPlugin = new ReactRefreshWebpackPlugin();
+    const reactRefreshWebpackPlugin = new ReactRefreshWebpackPlugin({
+        overlay: false,
+    });
 
     const plugins: webpack.WebpackPluginInstance[] = [htmlPlugin, progressPlugin, definePlugin];
 

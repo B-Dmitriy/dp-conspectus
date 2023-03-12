@@ -1,3 +1,6 @@
 .light {
-  --text-color: var(--color-dark);
+  --bg-color: var(--color-white);
+  --text-color: var(--color-black);
+  --text-secondary: var(--gray-dark-3);
+  --tree-item-hover: var(--gray-light-1);
 }

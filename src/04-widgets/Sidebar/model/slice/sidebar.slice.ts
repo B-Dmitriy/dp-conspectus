@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { SidebarState } from '04-widgets/Sidebar/types/sidebar.types';
 import { fetchSections } from '04-widgets/Sidebar/model/services/fetchSections/fetchSections.thunk';
 import { fetchCatalogThunk } from '../services/fetchCatalogs/fetchCatalog.thunk';
-import { fetchArticle } from '../services/fetchArticleThunk/fetchArticle.thunk';
+import { fetchArticles } from '../services/fetchArticles/fetchArticles.thunk';
 
 const initialState: SidebarState = {
     isLoading: false,
@@ -53,10 +53,10 @@ const sidebarSlice = createSlice({
             .addCase(fetchSections.rejected, (state) => {
                 state.isLoading = false;
             })
-            .addCase(fetchArticle.pending, (state) => {
+            .addCase(fetchArticles.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(fetchArticle.fulfilled, (state, action) => {
+            .addCase(fetchArticles.fulfilled, (state, action) => {
                 const newChildren = action.payload.data.map((item: any) => ({
                     id: item.id,
                     title: item.title,
@@ -77,7 +77,7 @@ const sidebarSlice = createSlice({
                     : menuItem));
                 state.isLoading = false;
             })
-            .addCase(fetchArticle.rejected, (state) => {
+            .addCase(fetchArticles.rejected, (state) => {
                 state.isLoading = false;
             });
     },

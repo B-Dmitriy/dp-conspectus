@@ -1,0 +1,37 @@
+.TreeItemTitle {
+  width: 100%;
+  padding: 2px 4px;
+
+  line-height: 24px;
+
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+
+  .titleBtn {
+    display: flex;
+    align-items: start;
+  }
+
+  .deleteBtn {
+    display: none;
+    margin-left: auto;
+
+    &:hover {
+      background-color: var(--gray-light-3);
+    }
+  }
+
+  &:hover .deleteBtn {
+    display: flex;
+  }
+
+  &.withoutArrow {
+    margin-left: 24px;
+  }
+
+  &:hover {
+    background-color: var(--tree-item-hover);
+  }
+}

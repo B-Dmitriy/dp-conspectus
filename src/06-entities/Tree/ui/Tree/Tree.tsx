@@ -1,14 +1,8 @@
 import React from 'react';
 import { LinearLoader } from '07-shared/ui/LinearLoader/LinearLoader';
 import classes from './Tree.module.scss';
-import { TreeItem, TreeItemDeep, TreeItemInterface } from '../TreeItem/TreeItem';
-
-interface TreeProps {
-    items: TreeItemInterface[],
-    isLoading?: boolean;
-    onIconClick: (deep: TreeItemDeep, id: number) => void;
-    onItemClick: (deep: TreeItemDeep, id: number) => void;
-}
+import { TreeItem } from '../components/TreeItem/TreeItem';
+import { TreeProps } from '../../types/Tree.types';
 
 export function Tree({
     items, isLoading = false, onIconClick, onItemClick,
