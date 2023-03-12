@@ -8,34 +8,33 @@ import { TreeItem } from '../TreeItem/TreeItem';
 interface TreeItemDropdownProps {
     className?: string;
     items: TreeItemInterface[];
-    isArrowsDisable?: boolean;
+    isLoading?: boolean;
     onIconClick: (deep: TreeItemDeep, id: number) => void;
     onClickHandler: (deep: TreeItemDeep, id: number) => void;
 }
 
 export const TreeItemDropdown = ({
-    items, className, isArrowsDisable = false, onIconClick, onClickHandler,
+    items, className, isLoading = false, onIconClick, onClickHandler,
 }: TreeItemDropdownProps) => (
     <div className={classNames(classes.TreeItemDropdown, {
         [classes.noData]: items !== null && items.length < 1,
     }, [className])}
     >
-        {items !== null && items.length < 1
+        {items !== null && items.length < 1 && isLoading && <span>Loading...</span>}
+        {items !== null && items.length < 1 && !isLoading
                 && (
-                    <span className={classes.noData}>
-                        <Button
-                            fullWidth
-                            view="clear"
-                        >
-                            +
-                        </Button>
-                    </span>
+                    <Button
+                        fullWidth
+                        view="clear"
+                    >
+                        + добавить элемент
+                    </Button>
                 )}
         {items !== null && items.map((i) => (
             <TreeItem
                 key={i.id}
                 item={i}
-                isArrowsDisable={isArrowsDisable}
+                isLoading={isLoading}
                 onIconClick={onIconClick}
                 onClickHandler={onClickHandler}
             />

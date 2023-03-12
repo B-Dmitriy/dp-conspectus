@@ -15,7 +15,7 @@ export function Tree({
                     <TreeItem
                         key={i.id}
                         item={i}
-                        isArrowsDisable={isLoading}
+                        isLoading={isLoading}
                         onIconClick={onIconClick}
                         onClickHandler={onItemClick}
                     />

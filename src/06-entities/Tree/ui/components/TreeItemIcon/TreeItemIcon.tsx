@@ -7,22 +7,22 @@ import classes from './TreeItemIcon.module.scss';
 interface TreeItemIconProps {
     isOpen: boolean;
     isChildrenExist: boolean;
-    isArrowsDisable?: boolean;
+    isLoading?: boolean;
     onIconClickHandler: () => void;
 }
 
 export const TreeItemIcon = ({
     isOpen,
     isChildrenExist,
-    isArrowsDisable = false,
+    isLoading = false,
     onIconClickHandler,
 }: TreeItemIconProps) => (
     <Button
         view="clear"
-        disabled={isArrowsDisable}
+        disabled={isLoading}
         className={classNames(classes.TreeItemIcon, {
             [classes.item_open]: isOpen,
-            [classes.disabled]: isArrowsDisable,
+            [classes.disabled]: isLoading,
         }, [])}
         onClick={onIconClickHandler}
     >

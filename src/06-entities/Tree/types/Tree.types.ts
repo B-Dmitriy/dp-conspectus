@@ -10,7 +10,7 @@ export interface TreeItemInterface {
 
 export interface TreeItemProps {
     item: TreeItemInterface,
-    isArrowsDisable?: boolean;
+    isLoading?: boolean;
     onIconClick: (deep: TreeItemDeep, id: number) => void;
     onClickHandler: (deep: TreeItemDeep, id: number) => void;
 }
