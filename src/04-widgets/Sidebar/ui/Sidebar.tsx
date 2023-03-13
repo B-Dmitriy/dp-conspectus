@@ -2,12 +2,13 @@ import { classNames } from '07-shared/lib/classNames/classNames';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Tree } from '06-entities/Tree/ui/Tree/Tree';
-import { TreeItemDeep } from '06-entities/Tree/ui/TreeItem/TreeItem';
 import { useAppDispatch, useAppSelector } from '07-shared/hooks/appHooks';
 import { getMenuItems, getSidebarIsLoading } from '04-widgets/Sidebar/model/selectors/sidebar.selectors';
 import { fetchSections } from '04-widgets/Sidebar/model/services/fetchSections/fetchSections.thunk';
-import { fetchArticle } from '04-widgets/Sidebar/model/services/fetchArticleThunk/fetchArticle.thunk';
+import { fetchArticles } from '04-widgets/Sidebar/model/services/fetchArticles/fetchArticles.thunk';
 import { Button } from '07-shared/ui/Button/Button';
+import { TreeItemDeep } from '06-entities/Tree';
+import { sidebarActions } from '04-widgets/Sidebar/model/slice/sidebar.slice';
 import { fetchCatalogThunk } from '../model/services/fetchCatalogs/fetchCatalog.thunk';
 import classes from './Sidebar.module.scss';
 
@@ -29,13 +30,28 @@ export function Sidebar({ className }: SidebarProps) {
         dispatch(fetchCatalogThunk());
     }, []);
 
-    const onIconClick = (path: TreeItemDeep, id: number) => {
+    const onOpen = (path: TreeItemDeep, id: number) => {
         switch (path) {
         case '1':
             dispatch(fetchSections(id));
             break;
         case '2':
-            dispatch(fetchArticle(id));
+            dispatch(fetchArticles(id));
+            break;
+        case '3':
+            break;
+        default:
+            break;
+        }
+    };
+
+    const onClose = (path: TreeItemDeep, id: number) => {
+        switch (path) {
+        case '1':
+            dispatch(sidebarActions.resetSections(id));
+            break;
+        case '2':
+            dispatch(sidebarActions.resetArticles(id));
             break;
         case '3':
             break;
@@ -72,7 +88,8 @@ export function Sidebar({ className }: SidebarProps) {
                     <Tree
                         items={menuItems}
                         isLoading={isLoading}
-                        onIconClick={onIconClick}
+                        onOpen={onOpen}
+                        onClose={onClose}
                         onItemClick={onItemClick}
                     />
                 )}

@@ -4,6 +4,7 @@ import { Section } from '03-pages/Section';
 import { Catalog } from '03-pages/Catalog';
 import { Main } from '03-pages/Main';
 import Article from '03-pages/Article';
+import { ErrorScreen } from '04-widgets/ErrorScreen';
 import Layout from '../ui/Layout/Layout';
 
 export enum AppRoutes {
@@ -26,6 +27,7 @@ export const routerConfig = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
+        errorElement: <ErrorScreen />,
         children: [{
             path: RoutePaths.main,
             element: <Main />,

@@ -1,8 +1,8 @@
-@import "reset";
-@import "fonts";
-@import "themes/light";
-@import "variables/variables";
+@import "./reset";
+@import "./fonts";
+@import "./themes/light";
+@import "./variables/variables";
 
 body {
-  background-color: lightgray;
+  background-color: var(--bg-color);
 }

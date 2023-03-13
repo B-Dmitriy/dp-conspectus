@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchArticle = createAsyncThunk(
-    'sidebar/fetchArticleThunk',
+export const fetchArticles = createAsyncThunk(
+    'sidebar/fetchArticles',
     async (id: number, thunkAPI) => {
         try {
             const articles = await axios.get(`http://localhost:3000/articles?section_id=${id}`);

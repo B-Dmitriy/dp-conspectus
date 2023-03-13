@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SidebarState } from '04-widgets/Sidebar/types/sidebar.types';
 import { fetchSections } from '04-widgets/Sidebar/model/services/fetchSections/fetchSections.thunk';
 import { fetchCatalogThunk } from '../services/fetchCatalogs/fetchCatalog.thunk';
-import { fetchArticle } from '../services/fetchArticleThunk/fetchArticle.thunk';
+import { fetchArticles } from '../services/fetchArticles/fetchArticles.thunk';
 
 const initialState: SidebarState = {
     isLoading: false,
@@ -12,7 +12,29 @@ const initialState: SidebarState = {
 const sidebarSlice = createSlice({
     name: 'sidebar',
     initialState,
-    reducers: {},
+    reducers: {
+        resetSections(state, action: PayloadAction<number>) {
+            state.menuItems = state.menuItems
+                .map((item) => (item.id === action.payload
+                    ? {
+                        ...item,
+                        children: [],
+                    }
+                    : item));
+        },
+        resetArticles(state, action: PayloadAction<number>) {
+            state.menuItems = state.menuItems.map((menuItem) => (menuItem.children
+                && menuItem.children.find((sectionItem) => sectionItem.id === action.payload)
+                ? {
+                    ...menuItem,
+                    children: menuItem.children
+                        .map((section) => (section.id === action.payload
+                            ? { ...section, children: [] }
+                            : section)),
+                }
+                : menuItem));
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCatalogThunk.pending, (state) => {
@@ -53,10 +75,10 @@ const sidebarSlice = createSlice({
             .addCase(fetchSections.rejected, (state) => {
                 state.isLoading = false;
             })
-            .addCase(fetchArticle.pending, (state) => {
+            .addCase(fetchArticles.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(fetchArticle.fulfilled, (state, action) => {
+            .addCase(fetchArticles.fulfilled, (state, action) => {
                 const newChildren = action.payload.data.map((item: any) => ({
                     id: item.id,
                     title: item.title,
@@ -77,7 +99,7 @@ const sidebarSlice = createSlice({
                     : menuItem));
                 state.isLoading = false;
             })
-            .addCase(fetchArticle.rejected, (state) => {
+            .addCase(fetchArticles.rejected, (state) => {
                 state.isLoading = false;
             });
     },
