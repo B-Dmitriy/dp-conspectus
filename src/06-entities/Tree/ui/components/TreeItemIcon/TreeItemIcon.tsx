@@ -1,7 +1,7 @@
-import { classNames } from '07-shared/lib/classNames/classNames';
-import { Button } from '07-shared/ui/Button/Button';
-import Arrow from '07-shared/assets/icons/arrow-right.svg';
 import React from 'react';
+import Arrow from '07-shared/assets/icons/arrow-right.svg';
+import { Button } from '07-shared/ui/Button/Button';
+import { classNames } from '07-shared/lib/classNames/classNames';
 import classes from './TreeItemIcon.module.scss';
 
 interface TreeItemIconProps {

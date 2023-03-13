@@ -11,13 +11,15 @@ export interface TreeItemInterface {
 export interface TreeItemProps {
     item: TreeItemInterface,
     isLoading?: boolean;
-    onIconClick: (deep: TreeItemDeep, id: number) => void;
+    onOpen: (deep: TreeItemDeep, id: number) => void;
+    onClose: (deep: TreeItemDeep, id: number) => void;
     onClickHandler: (deep: TreeItemDeep, id: number) => void;
 }
 
 export interface TreeProps {
     items: TreeItemInterface[],
     isLoading?: boolean;
-    onIconClick: (deep: TreeItemDeep, id: number) => void;
+    onOpen: (deep: TreeItemDeep, id: number) => void;
+    onClose: (deep: TreeItemDeep, id: number) => void;
     onItemClick: (deep: TreeItemDeep, id: number) => void;
 }

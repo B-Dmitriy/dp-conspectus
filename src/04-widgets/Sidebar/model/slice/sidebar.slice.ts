@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SidebarState } from '04-widgets/Sidebar/types/sidebar.types';
 import { fetchSections } from '04-widgets/Sidebar/model/services/fetchSections/fetchSections.thunk';
 import { fetchCatalogThunk } from '../services/fetchCatalogs/fetchCatalog.thunk';
@@ -12,7 +12,29 @@ const initialState: SidebarState = {
 const sidebarSlice = createSlice({
     name: 'sidebar',
     initialState,
-    reducers: {},
+    reducers: {
+        resetSections(state, action: PayloadAction<number>) {
+            state.menuItems = state.menuItems
+                .map((item) => (item.id === action.payload
+                    ? {
+                        ...item,
+                        children: [],
+                    }
+                    : item));
+        },
+        resetArticles(state, action: PayloadAction<number>) {
+            state.menuItems = state.menuItems.map((menuItem) => (menuItem.children
+                && menuItem.children.find((sectionItem) => sectionItem.id === action.payload)
+                ? {
+                    ...menuItem,
+                    children: menuItem.children
+                        .map((section) => (section.id === action.payload
+                            ? { ...section, children: [] }
+                            : section)),
+                }
+                : menuItem));
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCatalogThunk.pending, (state) => {

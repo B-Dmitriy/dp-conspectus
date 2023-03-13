@@ -1,7 +1,7 @@
-import { classNames } from '07-shared/lib/classNames/classNames';
-import { Button } from '07-shared/ui/Button/Button';
 import React from 'react';
 import DeleteIcon from '07-shared/assets/icons/delete.svg';
+import { classNames } from '07-shared/lib/classNames/classNames';
+import { Button } from '07-shared/ui/Button/Button';
 import classes from './TreeItemTitle.module.scss';
 
 interface TreeItemTitleProps {

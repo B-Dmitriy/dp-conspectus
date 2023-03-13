@@ -6,18 +6,19 @@ import { TreeItemDropdown } from '../TreeItemDropdown/TreeItemDropdown';
 import classes from './TreeItem.module.scss';
 
 export const TreeItem = memo(({
-    item, isLoading = false, onIconClick, onClickHandler,
+    item, isLoading = false, onOpen, onClose, onClickHandler,
 }: TreeItemProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const onIconClickHandler = useCallback(() => {
         if (!isOpen) {
-            onIconClick(item.deep, item.id);
+            onOpen(item.deep, item.id);
             setIsOpen((prev) => !prev);
-            return;
+        } else {
+            onClose(item.deep, item.id);
+            setIsOpen((prev) => !prev);
         }
-        setIsOpen((prev) => !prev);
-    }, [isOpen]);
+    }, [isOpen, item]);
 
     const onTitleClick = () => onClickHandler(item.deep, item.id);
 
@@ -44,7 +45,8 @@ export const TreeItem = memo(({
                 <TreeItemDropdown
                     items={item.children}
                     isLoading={isLoading}
-                    onIconClick={onIconClick}
+                    onOpen={onOpen}
+                    onClose={onClose}
                     onClickHandler={onClickHandler}
                 />
             )}

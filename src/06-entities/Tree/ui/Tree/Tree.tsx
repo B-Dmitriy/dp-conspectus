@@ -5,7 +5,11 @@ import { TreeItem } from '../components/TreeItem/TreeItem';
 import { TreeProps } from '../../types/Tree.types';
 
 export function Tree({
-    items, isLoading = false, onIconClick, onItemClick,
+    items,
+    isLoading = false,
+    onOpen,
+    onClose,
+    onItemClick,
 }: TreeProps) {
     return (
         <div className={classes.tree_wrapper}>
@@ -16,7 +20,8 @@ export function Tree({
                         key={i.id}
                         item={i}
                         isLoading={isLoading}
-                        onIconClick={onIconClick}
+                        onOpen={onOpen}
+                        onClose={onClose}
                         onClickHandler={onItemClick}
                     />
                 ))
