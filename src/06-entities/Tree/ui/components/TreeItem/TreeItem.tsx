@@ -37,7 +37,7 @@ export const TreeItem = memo(({
                     title={item.title}
                     isLast={item.isLast}
                     onTitleClick={onTitleClick}
-                    onDeleteClick={() => console.log('delete')}
+                    onDeleteClick={() => alert('delete')}
                     isChildrenHasLength={!item.children.length}
                 />
             </div>

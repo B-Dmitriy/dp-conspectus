@@ -1,6 +1,9 @@
 .light {
-  --bg-color: var(--color-white);
-  --text-color: var(--color-black);
-  --text-secondary: var(--gray-dark-3);
-  --tree-item-hover: var(--gray-light-1);
+  --color-bg: var(--white);
+  --color-code-text: var(--white);
+  --color-code-bg: var(--blue-dark-2);
+  --color-primary: var(--blue);
+  --color-text: var(--black);
+  --color-text-secondary: var(--gray-dark-3);
+  --color-tree-item-hover: var(--gray-light-2);
 }

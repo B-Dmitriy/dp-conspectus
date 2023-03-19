@@ -1,7 +1,9 @@
 .Sidebar {
   width: var(--sidebar-width);
+  padding: 4px;
 
   transition: var(--transition-slow);
+  border-right: 1px solid var(--gray-light-2);
 
   &.rolled {
     width: var(--sidebar-rolled);
@@ -13,7 +15,7 @@
 
     display: flex;
     flex-direction: column;
-    background-color: blanchedalmond;
+    background-color: var(--color-bg);
     transition: var(--transition-slow);
   }
 }

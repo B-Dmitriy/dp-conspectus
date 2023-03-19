@@ -1,4 +1,6 @@
 .Layout {
+  background-color: var(--color-bg);
+
   .container {
     display: flex;
     min-height: calc(100vh - var(--header-height));

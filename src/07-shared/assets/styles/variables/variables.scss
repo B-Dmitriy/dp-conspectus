@@ -1,25 +1,44 @@
 :root {
+  /* Fonts */
+  --font-size-normal: 14px;
+  --font-size-large: 22px;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+
   /* Sizes */
   --header-height: 40px;
   --sidebar-width: 360px;
   --sidebar-rolled: 60px;
 
   /* Colors */
-  --color-white: #fff;
-  --gray-light-5: #f2f2f2;
-  --gray-light-4: #e5e5e5;
+  --white: #fff;
+  --gray-light-1: #f2f2f2;
+  --gray-light-2: #e5e5e5;
   --gray-light-3: #d1d1d1;
-  --gray-light-2: #c7c7c7;
-  --gray-light-1: #aeaeae;
+  --gray-light-4: #c7c7c7;
+  --gray-light-5: #aeaeae;
   --gray-dark-1: #636363;
   --gray-dark-2: #484848;
   --gray-dark-3: #3a3a3a;
   --gray-dark-4: #282828;
   --gray-dark-5: #202020;
-  --color-black: #121212;
+  --black: #121212;
+  --blue: #087ea4;
+  --blue-light: #1b9dc7;
+  --blue-dark-1: #374151;
+  --blue-dark-2: #23272f;
+  --blue-dark-3: #191c21;
+  --red: #5d1715;
+  --red-light: #ffe2dd;
+  --brown: #402c1b;
+  --yellow-light: #fdecc8;
+  --green: #1c3829;
+  --green-light: #dbeddb;
 
   /* Animation */
   --transition-slow: .25s;
+  --transition-very-slow: .4s;
 
   /* Constants */
   --border-radius: 4px;

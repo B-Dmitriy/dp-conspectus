@@ -1,6 +1,6 @@
 export const parseHeaders = (str: string): string => {
     if (str.length > 0) {
-        const headers = str.match(/\*\*\*.*\*\*\*/ig);
+        const headers = str.match(/###.*###/ig);
 
         if (headers && headers.length) {
             headers.forEach((header) => {
