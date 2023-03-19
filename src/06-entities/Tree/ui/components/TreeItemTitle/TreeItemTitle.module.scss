@@ -9,6 +9,8 @@
   justify-content: space-between;
 
   .titleBtn {
+    padding: 0 4px;
+
     display: flex;
     align-items: start;
   }
@@ -18,7 +20,7 @@
     margin-left: auto;
 
     &:hover {
-      background-color: var(--gray-light-3);
+      background-color: var(--gray-light-1);
     }
   }
 
@@ -31,6 +33,6 @@
   }
 
   &:hover {
-    background-color: var(--tree-item-hover);
+    background-color: var(--color-tree-item-hover);
   }
 }

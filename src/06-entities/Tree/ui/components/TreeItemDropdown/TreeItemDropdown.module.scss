@@ -3,8 +3,21 @@
   animation-duration: .2s;
   margin-left: 12px;
 
+  .addBtn {
+    padding: 2px 4px;
+
+    .addBtn_content {
+      display: flex;
+      align-items: center;
+    }
+
+    &:hover {
+      background-color: var(--color-tree-item-hover);
+    }
+  }
+
   &.noData {
-    margin-left: 24px;
+    margin-left: 32px;
   }
 }
 

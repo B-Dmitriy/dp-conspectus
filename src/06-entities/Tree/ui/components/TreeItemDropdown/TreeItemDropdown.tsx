@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from '07-shared/lib/classNames/classNames';
 import { Button } from '07-shared/ui/Button/Button';
 import type { TreeItemDeep, TreeItemInterface } from '06-entities/Tree';
+import AddIcon from '07-shared/assets/icons/add.svg';
 import { TreeItem } from '../TreeItem/TreeItem';
 import classes from './TreeItemDropdown.module.scss';
 
@@ -44,8 +45,13 @@ export const TreeItemDropdown = ({
                     <Button
                         fullWidth
                         view="clear"
+                        className={classes.addBtn}
+                        onClick={() => alert('Add element')}
                     >
-                        + добавить элемент
+                        <span className={classes.addBtn_content}>
+                            <AddIcon />
+                            добавить
+                        </span>
                     </Button>
                 )}
             {items !== null && items.map((i) => (

@@ -23,7 +23,10 @@ const Article = () => {
     }, [id]);
 
     return (
-        <div className={classNames(classes.Article)}>
+        <div className={classNames(classes.Article, {
+            [classes.contentReady]: !isLoading,
+        })}
+        >
             {isLoading
                 ? <PageLoader />
                 : <FormattedText text={article.text} />}

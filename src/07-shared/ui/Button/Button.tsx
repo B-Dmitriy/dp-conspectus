@@ -19,9 +19,9 @@ export const Button = ({
 }: ButtonProps) => (
     <button
         className={classNames(classes.Button, {
-            [classes.clear]: view === 'primary',
-            [classes.clear]: view === 'secondary',
-            [classes.clear]: view === 'outline',
+            [classes.primary]: view === 'primary',
+            [classes.secondary]: view === 'secondary',
+            [classes.outline]: view === 'outline',
             [classes.clear]: view === 'clear',
             [classes.fullWidth]: fullWidth,
         }, [className])}
