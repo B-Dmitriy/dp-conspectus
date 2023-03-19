@@ -16,11 +16,13 @@
   }
 
   .deleteBtn {
+    padding: 2px;
+
     display: none;
     margin-left: auto;
 
     &:hover {
-      background-color: var(--gray-light-1);
+      background-color: var(--color-tree-delete-hover);
     }
   }
 

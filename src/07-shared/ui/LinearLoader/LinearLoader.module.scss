@@ -42,7 +42,7 @@
 
     position: absolute;
     overflow: hidden;
-    background-color: gray;
+    background: var(--color-linear-loader);
 
     &.loading {
       animation-name: linear;

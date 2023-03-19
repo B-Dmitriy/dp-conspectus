@@ -2,7 +2,7 @@
   width: var(--sidebar-width);
   padding: 4px;
 
-  transition: var(--transition-slow);
+  transition: width var(--transition-slow);
   border-right: 1px solid var(--gray-light-2);
 
   &.rolled {

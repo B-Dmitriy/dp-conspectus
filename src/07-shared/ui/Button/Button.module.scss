@@ -8,9 +8,15 @@
   }
 
   &.clear {
+    color: var(--color-text);
+
     background: none;
     border: none;
     cursor: pointer;
+
+    svg {
+      fill: var(--color-text);
+    }
   }
 
   &.primary {

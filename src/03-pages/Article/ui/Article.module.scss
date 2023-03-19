@@ -2,6 +2,7 @@
   width: 100%;
 
   background-color: var(--color-bg);
+  transition: background-color var(--transition-slow);
 
   &.contentReady {
     animation-name: show;
