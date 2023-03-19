@@ -1,4 +1,6 @@
 .TreeItemDropdown {
+  color: var(--color-text);
+
   animation-name: drop;
   animation-duration: .2s;
   margin-left: 12px;
@@ -9,6 +11,12 @@
     .addBtn_content {
       display: flex;
       align-items: center;
+
+      svg {
+        path {
+          stroke: var(--color-text);
+        }
+      }
     }
 
     &:hover {

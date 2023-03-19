@@ -1,5 +1,6 @@
 .Layout {
   background-color: var(--color-bg);
+  transition: background-color var(--transition-slow);
 
   .container {
     display: flex;
