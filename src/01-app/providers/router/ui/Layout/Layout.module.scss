@@ -4,6 +4,10 @@
 
   .container {
     display: flex;
-    min-height: calc(100vh - var(--header-height));
+
+    .main {
+      flex-grow: 1;
+      min-height: calc(100vh - var(--header-height));
+    }
   }
 }

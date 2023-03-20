@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { articleReducer } from '03-pages/Article';
-import { catalogReducer } from '03-pages/Catalog/model/catalog.slice';
-import { sidebarReducer } from '04-widgets/Sidebar';
+import { menuTreeReducer } from '05-features/MenuTree';
+import { articleReducer } from '06-entities/Article';
+import { catalogReducer } from '06-entities/Catalog';
 
 export const store = configureStore({
     reducer: {
+        menuTree: menuTreeReducer,
         catalog: catalogReducer,
-        sidebar: sidebarReducer,
         article: articleReducer,
     },
-    devTools: true,
+    devTools: __IS_DEV__,
 });
 
 export type RootState = ReturnType<typeof store.getState>
