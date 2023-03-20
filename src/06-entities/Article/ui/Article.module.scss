@@ -1,0 +1,21 @@
+.Article {
+  height: 100%;
+
+  background-color: var(--color-bg);
+  transition: background-color var(--transition-slow);
+
+  &.contentReady {
+    animation-name: show;
+    animation-duration: var(--transition-very-slow);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

@@ -18,7 +18,9 @@ function Layout({ className }: LayoutProps) {
             <Navbar />
             <div className={classes.container}>
                 <Sidebar />
-                <Outlet />
+                <main className={classes.main}>
+                    <Outlet />
+                </main>
             </div>
         </div>
     );

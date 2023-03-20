@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import NotFound from '03-pages/NotFound';
-import { Section } from '03-pages/Section';
-import { Catalog } from '03-pages/Catalog';
-import { Main } from '03-pages/Main';
-import Article from '03-pages/Article';
+import MainPage from '03-pages/MainPage';
+import ArticlePage from '03-pages/ArticlePage';
+import CatalogPage from '03-pages/CatalogPage';
+import SectionPage from '03-pages/SectionPage';
 import { ErrorScreen } from '04-widgets/ErrorScreen';
+import { withSuspense } from '07-shared/lib/withSuspense/withSuspense';
 import Layout from '../ui/Layout/Layout';
 
 export enum AppRoutes {
@@ -30,17 +31,17 @@ export const routerConfig = createBrowserRouter([
         errorElement: <ErrorScreen />,
         children: [{
             path: RoutePaths.main,
-            element: <Main />,
+            element: withSuspense(<MainPage />),
         }, {
             path: RoutePaths.catalog,
-            element: <Catalog />,
+            element: withSuspense(<CatalogPage />),
         }, {
             index: true,
             path: RoutePaths.section,
-            element: <Section />,
+            element: withSuspense(<SectionPage />),
         }, {
             path: RoutePaths.article,
-            element: <Article />,
+            element: withSuspense(<ArticlePage />),
         }, {
             path: RoutePaths.not_found,
             element: <NotFound />,
