@@ -1,4 +1,6 @@
-import React, { ReactNode, useMemo, useState } from 'react';
+import React, {
+    ReactNode, useEffect, useMemo, useState,
+} from 'react';
 import { CURRENT_THEME_KEY } from '07-shared/constants/constants';
 import { Theme, THEME_LIST, ThemeContext } from '../lib/themeContext';
 
@@ -16,6 +18,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
         setTheme,
         themeList: THEME_LIST,
     }), [theme]);
+
+    useEffect(() => {
+        document.body.className = defaultTheme;
+    }, []);
 
     return (
         <ThemeContext.Provider value={themeContextDefault}>
