@@ -11,10 +11,10 @@ interface LayoutProps {
 }
 
 function Layout({ className }: LayoutProps) {
-    const { theme } = useTheme();
+    // const { theme } = useTheme();
 
     return (
-        <div className={classNames(classes.Layout, {}, [className, theme])}>
+        <div className={classNames(classes.Layout, {}, [className])}>
             <Navbar />
             <div className={classes.container}>
                 <Sidebar />

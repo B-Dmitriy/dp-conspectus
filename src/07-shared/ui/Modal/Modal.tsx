@@ -2,25 +2,33 @@ import {
     ReactNode, MouseEvent, useEffect, useState, useRef,
 } from 'react';
 import { classNames } from '07-shared/lib/classNames/classNames';
-import { useTheme } from '07-shared/providers/theme';
 import { Portal } from '../Portal/Portal';
 import classes from './Modal.module.scss';
 
 interface ModalProps {
-    className?: string;
-    children: ReactNode;
     isOpen: boolean;
+    isLazy?: boolean
+    children: ReactNode;
     onClose?: () => void;
+    className?: string;
 }
 
 export const Modal = ({
-    isOpen, onClose, children, className,
+    isOpen,
+    isLazy,
+    children,
+    onClose,
+    className,
 }: ModalProps) => {
+    /** Ссылка для таймера таймаута анимации. Если хранить не в ref при быстром
+     * размонтировании clearTimeout может не найти значения и выпасть в ошибку */
+    const timerRef = useRef<ReturnType<typeof setTimeout>>();
     const ANIMATION_DELAY = 150; // Must be shorts then transition time (250)
 
-    const { theme } = useTheme();
-    const timerRef = useRef<ReturnType<typeof setTimeout>>();
     const [isClosing, setIsClosing] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    const stopPropagation = (e: MouseEvent) => e.stopPropagation();
 
     const closeHandler = () => {
         setIsClosing(true);
@@ -38,9 +46,11 @@ export const Modal = ({
         }
     };
 
-    const onOverlayClick = () => closeHandler();
-
-    const onContentClick = (e: MouseEvent) => e.stopPropagation();
+    useEffect(() => {
+        if (isOpen) {
+            setIsMounted(true);
+        }
+    }, [isOpen]);
 
     useEffect(() => {
         document.body.addEventListener('keydown', onKeyPress);
@@ -50,20 +60,22 @@ export const Modal = ({
         };
     }, []);
 
+    if (isLazy && !isMounted) return null;
+
     return (
         <Portal>
             <div className={classNames(classes.Modal, {
                 [classes.opened]: isOpen,
                 [classes.closing]: isClosing,
-            }, [className, theme])}
+            }, [className])}
             >
                 <div
                     className={classes.overlay}
-                    onClick={onOverlayClick}
+                    onClick={closeHandler}
                 >
                     <div
                         className={classes.content}
-                        onClick={onContentClick}
+                        onClick={stopPropagation}
                     >
                         {children}
                     </div>

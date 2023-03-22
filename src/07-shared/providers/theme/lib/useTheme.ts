@@ -14,6 +14,7 @@ export function useTheme(): UseThemeResult {
     const setNewTheme = (newTheme: Theme) => {
         if (setTheme) {
             setTheme(newTheme);
+            document.body.className = newTheme;
             localStorage.setItem(CURRENT_THEME_KEY, newTheme);
         }
     };
