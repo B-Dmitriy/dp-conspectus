@@ -16,10 +16,10 @@ interface MenuTreeProps {
 }
 
 export const MenuTree = ({ className, isRolled }: MenuTreeProps) => {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const isLoading = useAppSelector(getSidebarIsLoading);
+    const dispatch = useAppDispatch();
     const menuItems = useAppSelector(getMenuItems);
+    const isLoading = useAppSelector(getSidebarIsLoading);
 
     const onOpen = (path: TreeItemDeep, id: number) => {
         switch (path) {

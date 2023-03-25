@@ -1,5 +1,5 @@
-import { classNames } from '07-shared/lib/classNames/classNames';
 import { ThemeSwitcher } from '05-features/ThemeSwitcher/ui/ThemeSwitcher';
+import { classNames } from '07-shared/lib/classNames/classNames';
 import classes from './Navbar.module.scss';
 
 interface NavbarProps {

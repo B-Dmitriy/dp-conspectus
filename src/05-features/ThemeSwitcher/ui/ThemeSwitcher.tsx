@@ -6,9 +6,9 @@ export const ThemeSwitcher = () => {
     const { theme, setTheme, themeList } = useTheme();
 
     const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value);
         setTheme(e.target.value as Theme);
     };
+
     return (
         <select defaultValue={theme} onChange={onChange}>
             {themeList.map((item) => <option key={item}>{item}</option>)}
