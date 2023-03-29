@@ -16,6 +16,11 @@
       "id": 2,
       "title": "Internet",
       "description": "Общие сведения о работе сети"
+    },
+    {
+      "id": 3,
+      "title": "Linux",
+      "description": "Операционная система Linux"
     }
   ],
   "sections": [
@@ -48,6 +53,11 @@
       "title": "Tests",
       "catalog_id": 1,
       "id": 6
+    },
+    {
+      "title": "Общее",
+      "catalog_id": 3,
+      "id": 7
     }
   ],
   "articles": [
@@ -200,6 +210,13 @@
       "section_id": 3,
       "title": "Основные возможности React",
       "text": "###Основные возможности###\n\n1) Доступность (стандарт a11y)\n\t- Семантическая вёрстка\n\t- Таб инексы, атрибуты тэгов (alt=\"\")\n\t- Label для всех inputs\n\t- Адекватная информация об ошибках\n\n2) Разделение кода - достигается с помощю webpack\n\t- import/export - разделения на компоненты и модули\n\t- Лези лоадинг, позволяющий подгружать только необходимые файлы\n\t\tconst Copm = React.lazy(() => import('./Component'))\n\t\t<Suspense fallback={<div>Load...</div>}><Comp /></Suspense>\n\n3) Контекст - необходим для хранения глобальных данных, создается независимо\n```\n//получает значение, при инициализации Provider\nconst ThemeContext = React.createContext({})\n\n< ThemeContext.Provider value=\"dark\" >\n       < Comp />\n < /ThemeContext.Provider >\n\t\t\n// Внутри конф обращаемся либо через Consumer либо useContext\n< MyContext.Consumer >\n  \t{value => /* отрендерить что-то, используя значение контекста */}\n< /MyContext.Consumer >\n```\n\n4) Предохранители - Error Boundary - классовый компонент высшего порядка (HOC), имеющий 2\n\tобязательных метода: static getDerivedStateFromError возвращающий { hasError: true }\n\tустанавливает ошибку, и тем самым выводит \"запасной\" JSX. \n\tcomponentDidCatch - срабатывает после получения ошибки, в нём можно сделать\n\tасинхронные операции или залогировать ошибку.\n```\nexport class ErrorBoundary extends React.Component< Props, State > {\n    constructor(props: Props) {\n        super(props);\n        this.state = { hasError: false };\n    }\n\n    static getDerivedStateFromError(_: Error) {\n        return { hasError: true };\n    }\n\n    componentDidCatch(error: Error, errorInfo: ErrorInfo) {\n        // eslint-disable-next-line no-console\n        console.log('[Error boundary]', error.name, error.message, errorInfo);\n    }\n\n    render() {\n        const { hasError } = this.state;\n        const { children } = this.props;\n\n        if (hasError) {\n            return <Suspense fallback={< Loader />}>< ErrorScreen />< /Suspense >;\n        }\n\n        return children;\n    }\n}\n```\n\n5) Перенаправление рефов - React.forwardRef((props, ref) => {...Component})\n\tforwardRef - HOC, позволяющий передать объект ссылки через props\n\n6) Фрагменты < React.Fragment /> || < > < \\> \n\n7) HOC - функция которая принимает Компонент, а возвращает новый компонтент обёртку, который\n\tдобавляет переданному функционал или данные(через пропсы).\n\n8) Сторонние библиотеки - экосистема React (Формы, Роуты, Тесты, Билд Тулс, Линтеры и т д)\n\n9) JSX - \"HTML внутри JS\" - придуманый в Facebook способ разметки\n\n10) Оптимизация\n\tОптимизации сборок достигаются минификацией бандлов, в webpack это TerserPlugin \n\t- для prod сборки и fork-ts-checker-webpack-plugin для dev с TypeScript (отключает\n\tпроверку TypeScript компиляции) Так же рекомендуется убрать SourceMap из prod сборки\n\tСюда же можно отнести процесс сравнения VDOM (Reconcilation), встроеный способ \n\tсравнения изменений, позволяющий не перерисовывать не изменившиеся узлы + Memo\n\n11) Порталы\n\t- Api ReactDOM, позволяющий вмонтировать элемент в указанный узел DOM,\n\t\t* ReactDOM.createPortal(child, container)\n\n12) Profiler - измеряет то, как часто рендерится React-приложение и какова «стоимость» этого.\n\tЕго задача — помочь найти медленные части приложения, которые можно оптимизировать \n\t(например, через мемоизацию). Компонент Profiler - оборачивает тестируемый компонент, \n\tпринимает в пропсы id и onRender - обработчик в который придут данные, о компоненте.\n\n13-14) React без ES6 - React без JSX\n\t- createReactClass() - функция из спец пакета, позволяла создать класс React\n\t- React.createElement(elem, attr, children) - создать элемент\n\t- React.createFactory(type) - dозвращает функцию, которая создаёт элементы React \n\tзаданного типа(type) Аналог: .map((item)).\n\n15) Согласование (Reconsilation) - процесс сравнения VDOM элементов, и списков. Улучшается\n\tFacebook.\n\n16) Ref и DOM - рефы необходимы для императивного взаимодействия с DOM, управления фокусом и\n\tанимациями. React.createRef() - создаёт объект ссылки, нельзя использовать с \n\tфункциональными компонентами, потому что для них не создаётся экземпляр класса, Ref.\n\tЕсли необходимо передать реф в функциональный компонент, нужно возпользоваться HOC \n\tReact.forwardRef - он дополняет пропсы слотом для объекта ref.\n\n17) Render prop\nРодитель: Компонент, запрашивает данные, и возвращает функцию (компонент ребёнок): \n* переданную в пропсы\n```\n// В родителе: \nreturn < Child render={(data) => <Child data={data} />}) />\n\n// В ребёнке: \nreturn render(data)\n```\n* или обёрнутую как children\n```\n// В родителе: \nreturn < Parent >\n\t(data) => \n\t\t< Child data={data} />\n\t}\n</Parent>\n// В ребёнке\nreturn children(data)\n\n```\n18) Типизация - основная TypeScript\n\n19) Strict mode - добавляет дополнительные проверки для потомков\n\n20) Prop Types - ранее метод React.Component - добавляющий возможность типизировать пропсы,\n\tсейчас отдельная библиотека.\n\n21) Controled/Uncontroled components - концепция контролируемых и не контролируемых компонент.\n\n22) Web-components - отдельная тема для разговора, тег наследуемфый от класса JS - HTMLElement\n\t- с его функционалом и методами жизненного цикла.",
+      "tags": []
+    },
+    {
+      "id": 20,
+      "section_id": 7,
+      "title": "Основные команды Linux",
+      "text": "###Часто используемые команды Linux###\n***echo*** \"string\" - отображаeт строку текста (флаг -e позволяет определять спец символы)\n\n***cat*** - вычитывает текст файла и направляет его в поток вывода (по-умолчанию консоль),\nможно направить в другую команду.\n\n* cat \"Some text\" > text.txt - создаст файл вычитывает текст \"Some text\" и поместит его в файл,\nсоздав его, если таковой отсутствует или перезаписав данные если файл существовал.\n\n* cat \"Some text\" >> text.txt - создаст файл вычитывает текст \"Some text\" и и дополнит в файл.\n\n***less***- вычитывает текст файла и выводит его в консоль в размер окна с возможностью прокрутки.\n\n***more*** - вычитывает текст файла и выводит его в консоль в размер окна с указанием процента\nпоказанного текста и возможностью постраничного вывода.\n\n***editor***< filename > - открывает файл в редакторе nano/vim (по-умолчанию nano)\n\n***find < dir > < options > < template >*** - позволяет искать файлы по шаблону поиска,\ndir - директория поиска, template - строковый шаблон для поиска, options - по какому полю\nискать, чаще всего используют -name\n\n* find /etc -name \"hosts*\" - найти в директории etc все файлы, имя которых начинается с hosts\n\n***grep < options > < template > < file >*** - позволяет найти строку в файлах, template - строковый шаблон\nдля поиска, options - , при выборе директории в file, передаём -r, для рекурсивного поиска во всех\nфайлах директории, file - директория или файл для поиска\n\n* grep -r \"text\" /home/user/Desktop - найти совпадения со строкой \"text\" в файлах на рабочем столе",
       "tags": []
     }
   ],
