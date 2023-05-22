@@ -21,6 +21,11 @@
       "id": 3,
       "title": "Linux",
       "description": "Операционная система Linux"
+    },
+    {
+      "id": 4,
+      "title": "Golang",
+      "description": "Конспекты по языку Go"
     }
   ],
   "sections": [
@@ -58,6 +63,11 @@
       "title": "Общее",
       "catalog_id": 3,
       "id": 7
+    },
+    {
+      "title": "Стандартные библиотеки",
+      "catalog_id": 4,
+      "id": 8
     }
   ],
   "articles": [
@@ -217,6 +227,13 @@
       "section_id": 7,
       "title": "Основные команды Linux",
       "text": "###Часто используемые команды Linux###\n***echo*** \"string\" - отображаeт строку текста (флаг -e позволяет определять спец символы)\n\n***cat*** - вычитывает текст файла и направляет его в поток вывода (по-умолчанию консоль),\nможно направить в другую команду.\n\n* cat \"Some text\" > text.txt - создаст файл вычитывает текст \"Some text\" и поместит его в файл,\nсоздав его, если таковой отсутствует или перезаписав данные если файл существовал.\n\n* cat \"Some text\" >> text.txt - создаст файл вычитывает текст \"Some text\" и и дополнит в файл.\n\n***less***- вычитывает текст файла и выводит его в консоль в размер окна с возможностью прокрутки.\n\n***more*** - вычитывает текст файла и выводит его в консоль в размер окна с указанием процента\nпоказанного текста и возможностью постраничного вывода.\n\n***editor***< filename > - открывает файл в редакторе nano/vim (по-умолчанию nano)\n\n***find < dir > < options > < template >*** - позволяет искать файлы по шаблону поиска,\ndir - директория поиска, template - строковый шаблон для поиска, options - по какому полю\nискать, чаще всего используют -name\n\n* find /etc -name \"hosts*\" - найти в директории etc все файлы, имя которых начинается с hosts\n\n***grep < options > < template > < file >*** - позволяет найти строку в файлах, template - строковый шаблон\nдля поиска, options - , при выборе директории в file, передаём -r, для рекурсивного поиска во всех\nфайлах директории, file - директория или файл для поиска\n\n* grep -r \"text\" /home/user/Desktop - найти совпадения со строкой \"text\" в файлах на рабочем столе",
+      "tags": []
+    },
+    {
+      "id": 21,
+      "section_id": 8,
+      "title": "http/template",
+      "text": "###http/template###\nПакет реализует управляемые данными шаблоны для создания вывода HTML, защищенного от внедрения кода.\nОн предоставляет тот же интерфейс, что и текст/шаблон пакета, и его следует использовать вместо \ntext/template всякий раз, когда вывод представляет собой html.\n\n***template.New(name string) *Template*** - возвращает указатель на ИНСТАНС html-шаблона, добавляее ему\nимя name (БЕЗ САМОГО HTML), для добавления html у *Template есть метод Parse(html string)...\n```\nvar instance, err = template.New(\"main\")\n```\n\n***template.Must(t *Template, err error) *Template*** - вспомогательный метод, оборачивает создание instance.\nОбрабатывает ошибку (кидает панику), что позволяет более лаконично создать instance html-шаблона\n```\nvar instance = template.Must(template.New(\"name\").Parse(\"html\"))\n```\n\n***func ParseFiles(filenames ...string) (*Template, error)*** - позволяет прочитать несколько html файлов и \nсоздать из них шаблон с именем первого файла переданного в аргументы\n```\nvar instance, err = template.ParseFiles(\"layout.html\", \"main.html\")\n```\n\n***Методы экземпляра***\n*** * Name*** - возвращает имя шаблона.\n```\nfunc (t *Template) Clone() (*Template, error)\n```\n\n*** * Clone*** - возвращает копию экземпляра, включая все связанные шаблоны.\n```\nfunc (t *Template) Clone() (*Template, error)\n```\n\n*** * Delims*** - определяет символы для экранирования в шаблоне. \nПо умолчанию: left = \"{{\" , right=\"}}\"\n```\nfunc (t *Template) Delims(left, right string) *Template\n```\n```\nconst text = \"<<.Greeting>> {{.Name}}\"\n\ndata := struct {\n  Greeting string\n  Name     string\n}{\n  Greeting: \"Hello\",\n  Name:     \"Joe\",\n}\n\nt := template.Must(template.New(\"tpl\").Delims(\"<<\", \">>\").Parse(text)) // Output: Hello {{.Name}}\n```\n\n*** * Execute*** - применяет шаблон к указанному объекту данных, writer, который может иметь тип:\nhttp.ResponseWriter - при обработке ответа http\nio.Writer - при необходимости вывода шаблона в консоль (или в поток вывода) \n\nА аргумент data - это структура, к которой из шаблона можно обращаться через точку {{ . }}\nСоответственно её свойства и методы {{ .Name }} {{ .Method() }}\n\n```\nfunc (t *Template) Execute(writer io.Writer, data any) error\n```\n```\nerr := templateInstanse.Execute(writer, data)\nif err != nil {\n  log.Fatal(err)\n}\n```",
       "tags": []
     }
   ],
